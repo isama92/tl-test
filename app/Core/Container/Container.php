@@ -9,6 +9,7 @@ use App\Core\Renderer\RendererInterface;
 use App\Core\Request\RequestInterface;
 use App\Core\Response\ResponseInterface;
 use App\Core\Router\RouterInterface;
+use App\Core\Session\SessionInterface;
 use App\FactoryMethods\Config\ConfigFactoryMethod;
 use App\FactoryMethods\Db\DbFactoryMethod;
 use App\FactoryMethods\Renderer\RendererFactoryMethod;
@@ -118,6 +119,14 @@ class Container extends CoreAbstract implements ContainerInterface
         return $this->singleton(__FUNCTION__, [
             $this,
         ]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function session(): SessionInterface
+    {
+        return $this->singleton(__FUNCTION__);
     }
 
     /**

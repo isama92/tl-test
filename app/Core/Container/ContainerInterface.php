@@ -8,6 +8,7 @@ use App\Core\Renderer\RendererInterface;
 use App\Core\Request\RequestInterface;
 use App\Core\Response\ResponseInterface;
 use App\Core\Router\RouterInterface;
+use App\Core\Session\SessionInterface;
 
 interface ContainerInterface
 {
@@ -45,4 +46,9 @@ interface ContainerInterface
      * @return \App\Core\Renderer\RendererInterface
      */
     public function renderer(): RendererInterface;
+
+    /**
+     * @return \App\Core\Session\SessionInterface
+     */
+    public function session(): SessionInterface;
 }
