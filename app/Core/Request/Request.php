@@ -3,7 +3,7 @@
 namespace App\Core\Request;
 
 use App\Core\CoreAbstract;
-use App\Exceptions\Request\InvalidMethodException;
+use App\Exceptions\Request\InvalidRequestMethodException;
 
 class Request extends CoreAbstract implements RequestInterface
 {
@@ -27,13 +27,13 @@ class Request extends CoreAbstract implements RequestInterface
 
     /**
      * @inheritDoc
-     * @throws \App\Exceptions\Request\InvalidMethodException
+     * @throws \App\Exceptions\Request\InvalidRequestMethodException
      */
     public function getMethod(): string
     {
         $method = $_SERVER['REQUEST_METHOD'];
         if(!in_array($method, self::METHODS)) {
-            throw new InvalidMethodException($method);
+            throw new InvalidRequestMethodException($method);
         }
         return $method;
     }

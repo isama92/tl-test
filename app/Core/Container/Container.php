@@ -6,10 +6,14 @@ use App\Core\CoreAbstract;
 use App\Core\Config\ConfigInterface;
 use App\Core\Db\DbInterface;
 use App\Core\Renderer\RendererInterface;
+use App\Core\Request\RequestInterface;
+use App\Core\Response\ResponseInterface;
 use App\Core\Router\RouterInterface;
 use App\FactoryMethods\Config\ConfigFactoryMethod;
 use App\FactoryMethods\Db\DbFactoryMethod;
 use App\FactoryMethods\Renderer\RendererFactoryMethod;
+use App\FactoryMethods\Request\RequestFactoryMethod;
+use App\FactoryMethods\Response\ResponseFactoryMethod;
 use App\FactoryMethods\Router\RouterFactoryMethod;
 
 class Container extends CoreAbstract implements ContainerInterface
@@ -17,6 +21,8 @@ class Container extends CoreAbstract implements ContainerInterface
     use ConfigFactoryMethod;
     use DbFactoryMethod;
     use RouterFactoryMethod;
+    use RequestFactoryMethod;
+    use ResponseFactoryMethod;
     use RendererFactoryMethod;
 
     /**
@@ -86,6 +92,22 @@ class Container extends CoreAbstract implements ContainerInterface
         return $this->singleton(__FUNCTION__, [
             $this,
         ]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function request(): RequestInterface
+    {
+        return $this->singleton(__FUNCTION__);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function response(): ResponseInterface
+    {
+        return $this->singleton(__FUNCTION__);
     }
 
     /**

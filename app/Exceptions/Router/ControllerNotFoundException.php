@@ -12,6 +12,6 @@ class ControllerNotFoundException extends ExceptionAbstract
      */
     public function __construct(string $controllerName, string $controllerMethod)
     {
-        parent::__construct("Controller or controller method do not exist: {$controllerName}:$controllerMethod");
+        parent::__construct("Controller or controller method do not exist: '{$controllerName}:{$controllerMethod}'");
     }
 }

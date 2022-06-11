@@ -4,7 +4,6 @@ namespace App\Core\App;
 
 use App\Core\CoreAbstract;
 use App\Core\Container\ContainerInterface;
-use App\Core\Request\Request;
 use App\FactoryMethods\Container\ContainerFactoryMethod;
 
 class App extends CoreAbstract implements AppInterface
@@ -30,8 +29,12 @@ class App extends CoreAbstract implements AppInterface
      */
     public function run(): void
     {
-        $response = $this->container()->router()->handle(new Request());
-        echo $response->output();
+        $output = $this->container()
+            ->router()
+            ->handle()
+            ->output();
+
+        echo $output;
     }
 
     /**
