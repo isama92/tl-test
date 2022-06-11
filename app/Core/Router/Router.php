@@ -5,6 +5,7 @@ namespace App\Core\Router;
 use App\Core\Container\ContainerInterface;
 use App\Core\CoreAbstract;
 use App\Core\Request\RequestInterface;
+use App\Core\Response\Response;
 use App\Core\Response\ResponseInterface;
 use App\Exceptions\Router\ControllerNotFoundException;
 use App\Exceptions\Router\RouteNotFoundException;
@@ -100,7 +101,9 @@ class Router extends CoreAbstract implements RouterInterface
             throw new ControllerNotFoundException($controllerName, $controllerMethod);
         }
 
+        // TODO: implements error 404 if controller not found + add error template
+
         $controller = new $controllerName($this->container);
-        return $controller->{$controllerMethod}();
+        return new Response($controller->{$controllerMethod}());
     }
 }

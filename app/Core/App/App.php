@@ -30,7 +30,8 @@ class App extends CoreAbstract implements AppInterface
      */
     public function run(): void
     {
-        $this->container()->router()->handle(new Request());
+        $response = $this->container()->router()->handle(new Request());
+        echo $response->output();
     }
 
     /**

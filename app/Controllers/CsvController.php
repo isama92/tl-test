@@ -6,6 +6,6 @@ class CsvController extends Controller
 {
     public function index()
     {
-        dd('it works!');
+        return $this->container->renderer()->render('csv/index.html', ['name' => 'John']);
     }
 }

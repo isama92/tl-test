@@ -5,9 +5,11 @@ namespace App\Core\Container;
 use App\Core\CoreAbstract;
 use App\Core\Config\ConfigInterface;
 use App\Core\Db\DbInterface;
+use App\Core\Renderer\RendererInterface;
 use App\Core\Router\RouterInterface;
 use App\FactoryMethods\Config\ConfigFactoryMethod;
 use App\FactoryMethods\Db\DbFactoryMethod;
+use App\FactoryMethods\Renderer\RendererFactoryMethod;
 use App\FactoryMethods\Router\RouterFactoryMethod;
 
 class Container extends CoreAbstract implements ContainerInterface
@@ -15,6 +17,7 @@ class Container extends CoreAbstract implements ContainerInterface
     use ConfigFactoryMethod;
     use DbFactoryMethod;
     use RouterFactoryMethod;
+    use RendererFactoryMethod;
 
     /**
      * @var \App\Core\Config\ConfigInterface
@@ -44,6 +47,14 @@ class Container extends CoreAbstract implements ContainerInterface
     /**
      * @inheritDoc
      */
+    public function getRootDir(): string
+    {
+        return $this->rootDir;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function config(): ConfigInterface
     {
         return $this->singleton(__FUNCTION__, [
@@ -59,11 +70,11 @@ class Container extends CoreAbstract implements ContainerInterface
     {
         return $this->singleton(__FUNCTION__, [
             $this->config()->get('db.host'),
+            $this->config()->get('db.port'),
             $this->config()->get('db.user'),
             $this->config()->get('db.password'),
             $this->config()->get('db.dbname'),
             $this->config()->get('db.charset'),
-            $this->config()->get('db.port'),
         ]);
     }
 
@@ -71,6 +82,16 @@ class Container extends CoreAbstract implements ContainerInterface
      * @inheritDoc
      */
     public function router(): RouterInterface
+    {
+        return $this->singleton(__FUNCTION__, [
+            $this,
+        ]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function renderer(): RendererInterface
     {
         return $this->singleton(__FUNCTION__, [
             $this,
