@@ -1,0 +1,20 @@
+# track (the given index.php)
+track.php
+
+# env files
+.env
+
+# libs
+vendor/
+
+# docker
+docker/logs
+docker/mysql/data
+
+#editor
+.idea/
+
+#tools
+.phplint-cache
+.phpunit.result.cache
+coverage/

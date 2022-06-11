@@ -1,0 +1,6 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method App\\\\Components\\\\Container\\\\Container\\:\\:config\\(\\) should return App\\\\Components\\\\Config\\\\ConfigInterface but returns mixed\\.$#"
+			count: 1
+			path: app/Components/Container/Container.php

@@ -1,0 +1,45 @@
+{
+    "name": "isama92/tltest",
+    "type": "project",
+    "description": "Team Liquid test",
+    "keywords": [
+        "team",
+        "liquid",
+        "tl",
+        "test"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^8.1.7",
+        "josegonzalez/dotenv": "dev-master"
+    },
+    "require-dev": {
+        "overtrue/phplint": "^5.2",
+        "squizlabs/php_codesniffer": "^3.6",
+        "phpstan/phpstan": "^1.7",
+        "symfony/var-dumper": "^6.1"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "platform": {
+            "php": "8.1.7"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "prefer-stable": true,
+    "scripts": {
+        "checkcode": [
+            "phpcbf --standard=PSR12 app/ config/ public/",
+            "phplint",
+            "phpstan analyse --configuration phpstan.neon"
+        ],
+        "phpcbf": "phpcbf --standard=PSR12 app/ config/ public/",
+        "phplint": "phplint",
+        "phpstan:analyze": "phpstan analyse --configuration phpstan.neon",
+        "phpstan:baseline": "phpstan analyse --configuration phpstan.neon --generate-baseline"
+    }
+}

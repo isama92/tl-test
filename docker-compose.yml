@@ -1,0 +1,86 @@
+version: "3.7"
+
+services:
+    traefik:
+        image: traefik:v2.1
+        container_name: tltest_traefik
+        restart: unless-stopped
+        security_opt:
+            - no-new-privileges:true
+        networks:
+            - services
+        ports:
+            - 80:80
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+            - ./docker/traefik2/traefik.yml:/traefik.yml:ro
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.traefik.entrypoints=http"
+            - "traefik.http.routers.traefik.rule=Host(`traefik.localhost`)"
+            - "traefik.http.routers.traefik.service=api@internal"
+            - "traefik.http.services.traefik-service.loadbalancer.server.port=80"
+
+    apache:
+        build:
+            context: ./docker/apache/
+            dockerfile: Dockerfile
+        image: tltest/apache
+        container_name: tltest_apache
+        restart: unless-stopped
+        networks:
+            - services
+        volumes:
+            - ./docker/logs/apache2:/var/apache_logs/
+            - ./:/var/www/html
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.wm2.entrypoints=http"
+            - "traefik.http.routers.wm2.rule=Host(`tltest.localhost`)"
+            - "traefik.http.routers.wm2.service=wm2-service"
+            - "traefik.http.services.wm2-service.loadbalancer.server.port=80"
+            - "traefik.docker.network=services"
+
+    phpfpm:
+        build:
+            context: ./docker/phpfpm/
+            dockerfile: Dockerfile
+        image: tltest/phpfpm
+        container_name: tltest_phpfpm
+        user: "${DOCKER_LOCAL_USER:-1000}:${DOCKER_LOCAL_GROUP:-1000}"
+        networks:
+            - services
+        volumes:
+            - ./:/var/www/html
+
+    composer:
+        build:
+            context: ./docker/composer/
+            dockerfile: Dockerfile
+        image: tltest/composer
+        container_name: tltest_composer
+        depends_on:
+            - phpfpm
+        user: "${DOCKER_LOCAL_USER:-1000}:${DOCKER_LOCAL_GROUP:-1000}"
+        networks:
+            - services
+        volumes:
+            - ./:/var/www/html
+
+    mysql57:
+        image: mysql:8.0
+        container_name: tltest_mysql
+        restart: unless-stopped
+        networks:
+            - services
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+        volumes:
+            - ./docker/mysql/data:/var/lib/mysql
+
+networks:
+    services:
+        name: services
