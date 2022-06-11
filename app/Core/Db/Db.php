@@ -11,7 +11,10 @@ use PDOStatement;
  */
 class Db extends CoreAbstract implements DbInterface
 {
-    protected PDO $db;
+    /**
+     * @var \PDO|null The value is null when disconnected
+     */
+    protected PDO|null $db;
 
     /**
      * @param string $host
@@ -21,15 +24,43 @@ class Db extends CoreAbstract implements DbInterface
      * @param string $charset
      * @param int    $port
      */
-    public function __construct(string $host, string $user, string $password, string $dbname, string $charset, int $port = 3306)
-    {
+    public function __construct(
+        string $host,
+        int $port,
+        string $user,
+        string $password,
+        string $dbname,
+        string $charset
+    ) {
+        $this->connect($host, $port, $user, $password, $dbname, $charset);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function connect(
+        string $host,
+        int $port,
+        string $user,
+        string $password,
+        string $dbname,
+        string $charset
+    ): void {
         $dsn = "mysql:host={$host};port={$port};dbname={$dbname};charset={$charset}";
         $options = [
-            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
-            PDO::ATTR_EMULATE_PREPARES   => false,
+            PDO::ATTR_EMULATE_PREPARES => false,
         ];
         $this->db = $this->createPDO($dsn, $user, $password, $options);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function disconnect(): void
+    {
+        $this->db = null;
     }
 
     /**

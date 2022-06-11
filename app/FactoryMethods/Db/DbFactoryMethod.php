@@ -17,8 +17,8 @@ trait DbFactoryMethod
      *
      * @return \App\Core\Db\DbInterface
      */
-    protected function createDb(string $host, string $user, string $password, string $dbname, string $charset, int $port = 3306): DbInterface
+    protected function createDb(string $host, int $port, string $user, string $password, string $dbname, string $charset): DbInterface
     {
-        return new Db($host, $user, $password, $dbname, $charset, $port);
+        return new Db($host, $port, $user, $password, $dbname, $charset);
     }
 }

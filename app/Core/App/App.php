@@ -4,6 +4,7 @@ namespace App\Core\App;
 
 use App\Core\CoreAbstract;
 use App\Core\Container\ContainerInterface;
+use App\Core\Request\Request;
 use App\FactoryMethods\Container\ContainerFactoryMethod;
 
 class App extends CoreAbstract implements AppInterface
@@ -29,7 +30,7 @@ class App extends CoreAbstract implements AppInterface
      */
     public function run(): void
     {
-        // TODO: Implement run() method.
+        $this->container()->router()->handle(new Request());
     }
 
     /**
@@ -37,7 +38,7 @@ class App extends CoreAbstract implements AppInterface
      */
     public function terminate(): void
     {
-        // TODO: Implement terminate() method.
+        $this->container()->db()->disconnect();
     }
 
     /**

@@ -2,7 +2,7 @@
 
 // root dir
 $rootDir = realpath(__DIR__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
-$configDirName = 'config';
+const CONFIG_DIR_NAME = 'config';
 
 // composer files
 require $rootDir . 'vendor/autoload.php';
@@ -13,6 +13,6 @@ require $rootDir . 'vendor/autoload.php';
     ->toEnv();
 
 // app
-$app = new \App\Core\App\App($rootDir, $configDirName);
+$app = new \App\Core\App\App($rootDir, CONFIG_DIR_NAME);
 $app->run();
 $app->terminate();

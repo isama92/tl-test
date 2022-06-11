@@ -5,13 +5,16 @@ namespace App\Core\Container;
 use App\Core\CoreAbstract;
 use App\Core\Config\ConfigInterface;
 use App\Core\Db\DbInterface;
+use App\Core\Router\RouterInterface;
 use App\FactoryMethods\Config\ConfigFactoryMethod;
 use App\FactoryMethods\Db\DbFactoryMethod;
+use App\FactoryMethods\Router\RouterFactoryMethod;
 
 class Container extends CoreAbstract implements ContainerInterface
 {
     use ConfigFactoryMethod;
     use DbFactoryMethod;
+    use RouterFactoryMethod;
 
     /**
      * @var \App\Core\Config\ConfigInterface
@@ -61,6 +64,16 @@ class Container extends CoreAbstract implements ContainerInterface
             $this->config()->get('db.dbname'),
             $this->config()->get('db.charset'),
             $this->config()->get('db.port'),
+        ]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function router(): RouterInterface
+    {
+        return $this->singleton(__FUNCTION__, [
+            $this,
         ]);
     }
 
