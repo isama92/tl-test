@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Components\Config;
+namespace App\Core\Config;
 
 interface ConfigInterface
 {

@@ -2,8 +2,8 @@
 
 namespace App\FactoryMethods\Container;
 
-use App\Components\Container\Container;
-use App\Components\Container\ContainerInterface;
+use App\Core\Container\Container;
+use App\Core\Container\ContainerInterface;
 
 trait ContainerFactoryMethod
 {
@@ -11,7 +11,7 @@ trait ContainerFactoryMethod
      * @param string $rootDir
      * @param string $configDirName
      *
-     * @return \App\Components\Container\ContainerInterface
+     * @return \App\Core\Container\ContainerInterface
      */
     protected function createContainer(string $rootDir, string $configDirName): ContainerInterface
     {

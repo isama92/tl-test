@@ -13,6 +13,6 @@ require $rootDir . 'vendor/autoload.php';
     ->toEnv();
 
 // app
-$app = new \App\Components\App\App($rootDir, $configDirName);
+$app = new \App\Core\App\App($rootDir, $configDirName);
 $app->run();
 $app->terminate();

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Components\App;
+namespace App\Core\App;
 
-use App\Components\Container\ContainerInterface;
+use App\Core\Container\ContainerInterface;
 
 interface AppInterface
 {
@@ -17,7 +17,7 @@ interface AppInterface
     public function terminate(): void;
 
     /**
-     * @return \App\Components\Container\ContainerInterface
+     * @return \App\Core\Container\ContainerInterface
      */
     public function container(): ContainerInterface;
 }

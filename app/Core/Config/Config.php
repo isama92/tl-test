@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Components\Config;
+namespace App\Core\Config;
 
-use App\Components\ComponentAbstract;
+use App\Core\CoreAbstract;
 use App\Exceptions\Config\ConfigNotFoundException;
 
-class Config extends ComponentAbstract implements ConfigInterface
+class Config extends CoreAbstract implements ConfigInterface
 {
     /**
      * @var string Path to the config directory

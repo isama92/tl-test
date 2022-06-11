@@ -1,17 +1,20 @@
 <?php
 
-namespace App\Components\Container;
+namespace App\Core\Container;
 
-use App\Components\ComponentAbstract;
-use App\Components\Config\ConfigInterface;
+use App\Core\CoreAbstract;
+use App\Core\Config\ConfigInterface;
+use App\Core\Db\DbInterface;
 use App\FactoryMethods\Config\ConfigFactoryMethod;
+use App\FactoryMethods\Db\DbFactoryMethod;
 
-class Container extends ComponentAbstract implements ContainerInterface
+class Container extends CoreAbstract implements ContainerInterface
 {
     use ConfigFactoryMethod;
+    use DbFactoryMethod;
 
     /**
-     * @var \App\Components\Config\ConfigInterface
+     * @var \App\Core\Config\ConfigInterface
      */
     protected ConfigInterface $config;
 
@@ -43,6 +46,21 @@ class Container extends ComponentAbstract implements ContainerInterface
         return $this->singleton(__FUNCTION__, [
             // $configDirPath
             $this->rootDir . $this->configDirName . DIRECTORY_SEPARATOR,
+        ]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function db(): DbInterface
+    {
+        return $this->singleton(__FUNCTION__, [
+            $this->config()->get('db.host'),
+            $this->config()->get('db.user'),
+            $this->config()->get('db.password'),
+            $this->config()->get('db.dbname'),
+            $this->config()->get('db.charset'),
+            $this->config()->get('db.port'),
         ]);
     }
 

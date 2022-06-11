@@ -6,4 +6,5 @@ return [
     'user' => $_ENV['DB_USER'] ?? 'user',
     'password' => $_ENV['DB_PASSWORD'] ?? 'password',
     'dbname' => $_ENV['DB_DBNAME'] ?? 'dbname',
+    'charset' => $_ENV['DB_CHARSET'] ?? 'utf8mb4',
 ];

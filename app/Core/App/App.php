@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Components\App;
+namespace App\Core\App;
 
-use App\Components\ComponentAbstract;
-use App\Components\Container\ContainerInterface;
+use App\Core\CoreAbstract;
+use App\Core\Container\ContainerInterface;
 use App\FactoryMethods\Container\ContainerFactoryMethod;
 
-class App extends ComponentAbstract implements AppInterface
+class App extends CoreAbstract implements AppInterface
 {
     use ContainerFactoryMethod;
 
     /**
-     * @var \App\Components\Container\ContainerInterface
+     * @var \App\Core\Container\ContainerInterface
      */
     protected ContainerInterface $container;
 
@@ -29,6 +29,7 @@ class App extends ComponentAbstract implements AppInterface
      */
     public function run(): void
     {
+        // TODO: Implement run() method.
     }
 
     /**

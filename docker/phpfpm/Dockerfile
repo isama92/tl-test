@@ -2,7 +2,8 @@ FROM php:8.1.7-fpm
 
 WORKDIR /var/www/html
 
-# update the system
+# update the os and install its packages
+
 RUN apt-get update \
   && apt-get autoremove -y
 
@@ -11,6 +12,9 @@ RUN apt-get install -y --no-install-recommends\
     libzip-dev zip zlib1g-dev unzip
 
 RUN rm -rf /var/lib/apt/lists/*
+
+# PHP extensions
+RUN docker-php-ext-install pdo_mysql
 
 # add local user
 RUN useradd -u 1000 -m local

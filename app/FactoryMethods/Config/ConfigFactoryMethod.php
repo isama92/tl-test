@@ -2,15 +2,15 @@
 
 namespace App\FactoryMethods\Config;
 
-use App\Components\Config\Config;
-use App\Components\Config\ConfigInterface;
+use App\Core\Config\Config;
+use App\Core\Config\ConfigInterface;
 
 trait ConfigFactoryMethod
 {
     /**
      * @param string $configDirPath
      *
-     * @return \App\Components\Config\ConfigInterface
+     * @return \App\Core\Config\ConfigInterface
      */
     protected function createConfig(string $configDirPath): ConfigInterface
     {

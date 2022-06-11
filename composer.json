@@ -11,7 +11,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.1.7",
-        "josegonzalez/dotenv": "dev-master"
+        "josegonzalez/dotenv": "dev-master",
+        "ext-pdo": "*"
     },
     "require-dev": {
         "overtrue/phplint": "^5.2",
