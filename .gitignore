@@ -6,6 +6,7 @@ track.php
 
 # libs
 vendor/
+node_modules/
 
 # docker
 docker/logs

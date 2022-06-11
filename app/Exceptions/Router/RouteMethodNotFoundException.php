@@ -13,7 +13,7 @@ class RouteMethodNotFoundException extends ExceptionAbstract
      */
     public function __construct(string $route, string $method)
     {
-        parent::__construct("Route method not found: {$method} {$route}");
+        parent::__construct("{$method} {$route}: Method not allowed");
     }
 
     /**

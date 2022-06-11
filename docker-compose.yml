@@ -68,6 +68,14 @@ services:
         volumes:
             - ./:/var/www/html
 
+    node:
+        image: node:16.15
+        container_name: tltest_node
+        user: "${DOCKER_LOCAL_USER:-1000}:${DOCKER_LOCAL_GROUP:-1000}"
+        working_dir: /var/www/html
+        volumes:
+            - ./:/var/www/html
+
     mysql80:
         image: mysql:8.0
         container_name: tltest_mysql

@@ -12,7 +12,7 @@ class RouteNotFoundException extends ExceptionAbstract
      */
     public function __construct(string $route)
     {
-        parent::__construct("Route not found: {$route}");
+        parent::__construct("Page not found '{$route}'");
     }
 
     /**

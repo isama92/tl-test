@@ -1,0 +1,31 @@
+{
+  "name": "tltest",
+  "version": "0.0.1",
+  "description": "Team Liquid test",
+  "main": "index.js",
+  "scripts": {
+    "build": "node node_modules/gulp-cli/bin/gulp.js"
+  },
+  "keywords": [
+    "team",
+    "liquid",
+    "tl",
+    "test"
+  ],
+  "author": "Stefano Borzoni <isama92@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-sass": "^5.1.0",
+    "gulp-uglify": "^3.0.2",
+    "sass": "^1.52.3"
+  },
+  "dependencies": {
+    "bootstrap": "^5.1.3"
+  }
+}
