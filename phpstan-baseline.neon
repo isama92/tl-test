@@ -1,6 +1,341 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Method App\\\\Components\\\\Container\\\\Container\\:\\:config\\(\\) should return App\\\\Components\\\\Config\\\\ConfigInterface but returns mixed\\.$#"
+			message: "#^Call to an undefined method App\\\\Contracts\\\\UseCaseFactoryContract\\:\\:makeReadAndShowCsvFile\\(\\)\\.$#"
 			count: 1
-			path: app/Components/Container/Container.php
+			path: app/Components/CsvHandler/CsvHandlerComponent.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 1
+			path: app/Components/CsvHandler/UseCases/ReadAndShowCsvFile/ReadAndShowCsvFileUseCase.php
+
+		-
+			message: "#^Method App\\\\Components\\\\CsvHandler\\\\UseCases\\\\ReadAndShowCsvFile\\\\ReadAndShowCsvFileUseCase\\:\\:execute\\(\\) has parameter \\$requestData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Components/CsvHandler/UseCases/ReadAndShowCsvFile/ReadAndShowCsvFileUseCase.php
+
+		-
+			message: "#^Method App\\\\Contracts\\\\UseCaseContract\\:\\:execute\\(\\) has parameter \\$requestData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Contracts/UseCaseContract.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Container\\\\Container\\:\\:config\\(\\) should return App\\\\Core\\\\Config\\\\ConfigInterface but returns mixed\\.$#"
+			count: 1
+			path: app/Core/Container/Container.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Container\\\\Container\\:\\:db\\(\\) should return App\\\\Core\\\\Db\\\\DbInterface but returns mixed\\.$#"
+			count: 1
+			path: app/Core/Container/Container.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Container\\\\Container\\:\\:renderer\\(\\) should return App\\\\Core\\\\Renderer\\\\RendererInterface but returns mixed\\.$#"
+			count: 1
+			path: app/Core/Container/Container.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Container\\\\Container\\:\\:request\\(\\) should return App\\\\Core\\\\Request\\\\RequestInterface but returns mixed\\.$#"
+			count: 1
+			path: app/Core/Container/Container.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Container\\\\Container\\:\\:response\\(\\) should return App\\\\Core\\\\Response\\\\ResponseInterface but returns mixed\\.$#"
+			count: 1
+			path: app/Core/Container/Container.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Container\\\\Container\\:\\:router\\(\\) should return App\\\\Core\\\\Router\\\\RouterInterface but returns mixed\\.$#"
+			count: 1
+			path: app/Core/Container/Container.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Container\\\\Container\\:\\:session\\(\\) should return App\\\\Core\\\\Session\\\\SessionInterface but returns mixed\\.$#"
+			count: 1
+			path: app/Core/Container/Container.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Container\\\\Container\\:\\:storage\\(\\) should return App\\\\Core\\\\Storage\\\\StorageInterface but returns mixed\\.$#"
+			count: 1
+			path: app/Core/Container/Container.php
+
+		-
+			message: "#^Cannot call method fetch\\(\\) on PDOStatement\\|false\\.$#"
+			count: 1
+			path: app/Core/Db/Db.php
+
+		-
+			message: "#^Cannot call method fetchAll\\(\\) on PDOStatement\\|false\\.$#"
+			count: 1
+			path: app/Core/Db/Db.php
+
+		-
+			message: "#^Cannot call method prepare\\(\\) on PDO\\|null\\.$#"
+			count: 1
+			path: app/Core/Db/Db.php
+
+		-
+			message: "#^Cannot call method rowCount\\(\\) on PDOStatement\\|false\\.$#"
+			count: 2
+			path: app/Core/Db/Db.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Db\\\\Db\\:\\:createPDO\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Db/Db.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Db\\\\Db\\:\\:delete\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Db/Db.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Db\\\\Db\\:\\:insert\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Db/Db.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Db\\\\Db\\:\\:prepareAndExecute\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Db/Db.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Db\\\\Db\\:\\:select\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Db/Db.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Db\\\\Db\\:\\:select\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Db/Db.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Db\\\\Db\\:\\:selectOne\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Db/Db.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Db\\\\Db\\:\\:selectOne\\(\\) should return object but returns mixed\\.$#"
+			count: 1
+			path: app/Core/Db/Db.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Db\\\\DbInterface\\:\\:delete\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Db/DbInterface.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Db\\\\DbInterface\\:\\:insert\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Db/DbInterface.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Db\\\\DbInterface\\:\\:select\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Db/DbInterface.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Db\\\\DbInterface\\:\\:select\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Db/DbInterface.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Db\\\\DbInterface\\:\\:selectOne\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Db/DbInterface.php
+
+		-
+			message: "#^Cannot access offset 'cache' on mixed\\.$#"
+			count: 2
+			path: app/Core/Renderer/Renderer.php
+
+		-
+			message: "#^Cannot access offset 'dir' on mixed\\.$#"
+			count: 1
+			path: app/Core/Renderer/Renderer.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Renderer\\\\Renderer\\:\\:render\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Renderer/Renderer.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Renderer\\\\RendererInterface\\:\\:render\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Renderer/RendererInterface.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Request\\\\Request\\:\\:all\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Request/Request.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Request\\\\Request\\:\\:input\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Request/Request.php
+
+		-
+			message: "#^Property App\\\\Core\\\\Request\\\\Request\\:\\:\\$get type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Request/Request.php
+
+		-
+			message: "#^Property App\\\\Core\\\\Request\\\\Request\\:\\:\\$post type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Request/Request.php
+
+		-
+			message: "#^Property App\\\\Core\\\\Request\\\\Request\\:\\:\\$route \\(string\\) does not accept string\\|false\\.$#"
+			count: 1
+			path: app/Core/Request/Request.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Request\\\\RequestInterface\\:\\:all\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Request/RequestInterface.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Request\\\\RequestInterface\\:\\:input\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Request/RequestInterface.php
+
+		-
+			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: app/Core/Router/Router.php
+
+		-
+			message: "#^Cannot access offset string on mixed\\.$#"
+			count: 2
+			path: app/Core/Router/Router.php
+
+		-
+			message: "#^Cannot call method execute\\(\\) on App\\\\Middlewares\\\\MiddlewareInterface\\|null\\.$#"
+			count: 1
+			path: app/Core/Router/Router.php
+
+		-
+			message: "#^Cannot use array destructuring on mixed\\.$#"
+			count: 1
+			path: app/Core/Router/Router.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Router\\\\Router\\:\\:isMethodAvailable\\(\\) has parameter \\$routes with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Router/Router.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Router\\\\Router\\:\\:isRouteAvailable\\(\\) has parameter \\$routes with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Router/Router.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Router\\\\Router\\:\\:resolveController\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Router/Router.php
+
+		-
+			message: "#^Parameter \\#1 \\$controllerName of class App\\\\Exceptions\\\\Router\\\\ControllerNotFoundException constructor expects string, mixed given\\.$#"
+			count: 1
+			path: app/Core/Router/Router.php
+
+		-
+			message: "#^Parameter \\#1 \\$controllerName of method App\\\\Core\\\\Router\\\\Router\\:\\:isControllerAvailable\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: app/Core/Router/Router.php
+
+		-
+			message: "#^Parameter \\#1 \\$routes of method App\\\\Core\\\\Router\\\\Router\\:\\:isMethodAvailable\\(\\) expects array, mixed given\\.$#"
+			count: 1
+			path: app/Core/Router/Router.php
+
+		-
+			message: "#^Parameter \\#1 \\$routes of method App\\\\Core\\\\Router\\\\Router\\:\\:isRouteAvailable\\(\\) expects array, mixed given\\.$#"
+			count: 1
+			path: app/Core/Router/Router.php
+
+		-
+			message: "#^Parameter \\#2 \\$controllerMethod of class App\\\\Exceptions\\\\Router\\\\ControllerNotFoundException constructor expects string, mixed given\\.$#"
+			count: 1
+			path: app/Core/Router/Router.php
+
+		-
+			message: "#^Parameter \\#2 \\$controllerMethod of method App\\\\Core\\\\Router\\\\Router\\:\\:isControllerAvailable\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: app/Core/Router/Router.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Session\\\\Session\\:\\:token\\(\\) should return string but returns mixed\\.$#"
+			count: 1
+			path: app/Core/Session/Session.php
+
+		-
+			message: "#^Cannot access offset \\(int\\|string\\) on array\\|false\\.$#"
+			count: 1
+			path: app/Core/Storage/Storage.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Storage\\\\Storage\\:\\:getCsv\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Storage/Storage.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Storage\\\\Storage\\:\\:list\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Storage/Storage.php
+
+		-
+			message: "#^Parameter \\#1 \\$stream of function fclose expects resource, resource\\|false given\\.$#"
+			count: 1
+			path: app/Core/Storage/Storage.php
+
+		-
+			message: "#^Parameter \\#1 \\$stream of function fgetcsv expects resource, resource\\|false given\\.$#"
+			count: 2
+			path: app/Core/Storage/Storage.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Storage\\\\StorageInterface\\:\\:getCsv\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Storage/StorageInterface.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Storage\\\\StorageInterface\\:\\:list\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Storage/StorageInterface.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 1
+			path: app/Middlewares/StripStringsMiddleware.php
+
+		-
+			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
+			count: 2
+			path: app/Middlewares/TransformMiddleware.php
+
+		-
+			message: "#^Parameter \\#1 \\$key of method App\\\\Core\\\\Request\\\\RequestInterface\\:\\:updateGet\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: app/Middlewares/TransformMiddleware.php
+
+		-
+			message: "#^Parameter \\#1 \\$key of method App\\\\Core\\\\Request\\\\RequestInterface\\:\\:updatePost\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: app/Middlewares/TransformMiddleware.php
+
+		-
+			message: "#^Parameter \\#1 \\$key of method App\\\\Middlewares\\\\TransformMiddleware\\:\\:transform\\(\\) expects string, mixed given\\.$#"
+			count: 2
+			path: app/Middlewares/TransformMiddleware.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 1
+			path: app/Middlewares/TrimStringsMiddleware.php
+
+		-
+			message: "#^Cannot cast array to string\\.$#"
+			count: 1
+			path: app/Middlewares/VerifyCsrfTokenMiddleware.php

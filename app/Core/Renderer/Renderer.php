@@ -13,7 +13,7 @@ class Renderer extends CoreAbstract implements RendererInterface
     /**
      * Path where views are stored
      *
-     * @var string|mixed
+     * @var string
      */
     protected string $viewsDirPath;
 

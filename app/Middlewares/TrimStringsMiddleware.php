@@ -17,6 +17,6 @@ class TrimStringsMiddleware extends TransformMiddleware
      */
     protected function transform(string $key, mixed $value): mixed
     {
-        return trim($value);
+        return trim((string)$value);
     }
 }

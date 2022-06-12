@@ -12,6 +12,7 @@ class ReadAndShowCsvFileUseCase extends CsvHandlerUseCaseAbstract
     /**
      * @inheritDoc
      * @throws \App\Exceptions\Csv\CsvFileNotFoundException
+     * @throws \App\Exceptions\Response\InvalidStatusCodeException
      */
     public function execute(array $requestData = []): PresenterInterface
     {
@@ -31,7 +32,7 @@ class ReadAndShowCsvFileUseCase extends CsvHandlerUseCaseAbstract
         if (!is_null($activeFileName)) {
             // if file do not exist
             if (!in_array($activeFileName, $csvFiles)) {
-                throw new CsvFileNotFoundException($activeFileName);
+                throw new CsvFileNotFoundException((string)$activeFileName);
             }
 
             $activeFilePath = self::STORAGE_CSV_DIR . $activeFileName;

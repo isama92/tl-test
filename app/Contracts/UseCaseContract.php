@@ -9,7 +9,7 @@ interface UseCaseContract
     /**
      * @param array $requestData
      *
-     * @return mixed
+     * @return \App\Presenters\PresenterInterface
      */
     public function execute(array $requestData = []): PresenterInterface;
 }

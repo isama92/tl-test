@@ -9,6 +9,6 @@ class StripStringsMiddleware extends TransformMiddleware
      */
     protected function transform(string $key, mixed $value): mixed
     {
-        return htmlspecialchars($value);
+        return htmlspecialchars((string)$value);
     }
 }

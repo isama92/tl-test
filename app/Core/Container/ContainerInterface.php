@@ -9,6 +9,7 @@ use App\Core\Request\RequestInterface;
 use App\Core\Response\ResponseInterface;
 use App\Core\Router\RouterInterface;
 use App\Core\Session\SessionInterface;
+use App\Core\Storage\StorageInterface;
 
 interface ContainerInterface
 {
@@ -51,4 +52,9 @@ interface ContainerInterface
      * @return \App\Core\Session\SessionInterface
      */
     public function session(): SessionInterface;
+
+    /**
+     * @return \App\Core\Storage\StorageInterface
+     */
+    public function storage(): StorageInterface;
 }

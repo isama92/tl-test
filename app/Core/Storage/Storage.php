@@ -4,6 +4,7 @@ namespace App\Core\Storage;
 
 use App\Core\Container\ContainerInterface;
 use App\Core\CoreAbstract;
+use App\Exceptions\Storage\FileNotFoundException;
 
 class Storage extends CoreAbstract implements StorageInterface
 {
@@ -70,6 +71,7 @@ class Storage extends CoreAbstract implements StorageInterface
 
     /**
      * @inheritDoc
+     * @throws \App\Exceptions\Storage\FileNotFoundException
      */
     public function getCsv(
         string $filePath,
@@ -78,6 +80,10 @@ class Storage extends CoreAbstract implements StorageInterface
         string $escape = '\\',
         bool $hasHeaders = true
     ): array {
+        if (!$this->has($filePath)) {
+            throw new FileNotFoundException($filePath);
+        }
+
         $path = $this->storagePath . $filePath;
         $fh = fopen($path, self::MODE_R);
         $data = [];

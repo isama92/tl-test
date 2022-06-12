@@ -13,7 +13,7 @@ abstract class Component
     protected ContainerInterface $container;
 
     /**
-     * @var \App\Contracts\UseCaseFactoryContract|mixed
+     * @var \App\Contracts\UseCaseFactoryContract
      */
     protected UseCaseFactoryContract $useCaseFactory;
 
@@ -27,7 +27,7 @@ abstract class Component
     }
 
     /**
-     * @return mixed
+     * @return \App\Contracts\UseCaseFactoryContract
      */
     abstract protected function createUseCaseFactory(): UseCaseFactoryContract;
 }

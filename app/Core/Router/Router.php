@@ -165,6 +165,9 @@ class Router extends CoreAbstract implements RouterInterface
         $firstMiddleware = null;
         $lastMiddleware = null;
         foreach ($middlewares as $m) {
+            /**
+             * @var \App\Middlewares\MiddlewareInterface $m
+             */
             $middleware = new $m($this->container);
             if (!is_null($lastMiddleware)) {
                 $lastMiddleware->setNext($middleware);
