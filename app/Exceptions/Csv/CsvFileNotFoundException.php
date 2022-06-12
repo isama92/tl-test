@@ -12,7 +12,7 @@ class CsvFileNotFoundException extends ExceptionAbstract
      */
     public function __construct(string $file)
     {
-        parent::__construct("There are no CSV file named '{$file}'");
+        parent::__construct("There are no CSV files named '{$file}'");
     }
 
     /**
