@@ -33,9 +33,9 @@ interface DbInterface
      * @param string $query
      * @param array  $params
      *
-     * @return object
+     * @return object|null
      */
-    public function selectOne(string $query, array $params = []): object;
+    public function selectOne(string $query, array $params = []): ?object;
 
     /**
      * @param string $query
@@ -44,6 +44,14 @@ interface DbInterface
      * @return int Affected rows
      */
     public function insert(string $query, array $params = []): int;
+
+    /**
+     * @param string $query
+     * @param array  $params
+     *
+     * @return int Affected rows
+     */
+    public function update(string $query, array $params = []): int;
 
     /**
      * @param string $query

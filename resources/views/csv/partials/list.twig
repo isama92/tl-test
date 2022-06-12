@@ -3,7 +3,7 @@
     <ul class="list-group">
         {% for f in filesList %}
             <a class="list-group-item {{ f == activeFileName? 'active' : '2' }}"
-               href="?{{ queryStringFileName }}={{ f }}">
+               href="/?{{ queryStringFileName }}={{ f }}">
                 {{ f }}
             </a>
         {% endfor %}

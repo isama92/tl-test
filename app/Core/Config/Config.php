@@ -77,4 +77,31 @@ class Config extends CoreAbstract implements ConfigInterface
 
         return $configs;
     }
+
+    /**
+     * @inheritDoc
+     * @throws \App\Exceptions\Config\ConfigNotFoundException
+     */
+    public function isLocal(): bool
+    {
+        return $this->get('app.environment') === self::ENV_LOCAL;
+    }
+
+    /**
+     * @inheritDoc
+     * @throws \App\Exceptions\Config\ConfigNotFoundException
+     */
+    public function isStaging(): bool
+    {
+        return $this->get('app.environment') === self::ENV_STAGING;
+    }
+
+    /**
+     * @inheritDoc
+     * @throws \App\Exceptions\Config\ConfigNotFoundException
+     */
+    public function isProduction(): bool
+    {
+        return $this->get('app.environment') === self::ENV_PRODUCTION;
+    }
 }

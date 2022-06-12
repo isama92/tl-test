@@ -20,13 +20,33 @@ class ParserHelper
         string $enclosure = '"',
         string $escape = '\\'
     ): array {
+        // split csv string rows
         $lines = preg_split('/\r\n|[\r\n]/', $str);
         $arr = [];
 
+        // extract data from the csv string single line
         foreach ($lines as $l) {
             $arr[] = str_getcsv($l, $separator, $enclosure, $escape);
         }
 
-        return $arr;
+        // if it hasm't at least 2 lines (1 line for headers and 1 for data)
+        if (count($arr) < 2) {
+            return [];
+        }
+
+        // map each row with its headers
+
+        $data = [];
+        $headers = array_shift($arr);
+
+        foreach ($arr as $row) {
+            $rowData = [];
+            foreach ($row as $i => $col) {
+                $rowData[$headers[$i]] = $col;
+            }
+            $data[] = $rowData;
+        }
+
+        return $data;
     }
 }

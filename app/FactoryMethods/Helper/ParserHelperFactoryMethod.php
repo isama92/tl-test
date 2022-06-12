@@ -1,6 +1,6 @@
 <?php
 
-namespace App\FactoryMethods\Helpers;
+namespace App\FactoryMethods\Helper;
 
 use App\Helpers\ParserHelper;
 

@@ -101,16 +101,26 @@ class Db extends CoreAbstract implements DbInterface
     /**
      * @inheritDoc
      */
-    public function selectOne(string $query, array $params = []): object
+    public function selectOne(string $query, array $params = []): ?object
     {
         $stmt = $this->prepareAndExecute($query, $params);
-        return $stmt->fetch();
+        $obj = $stmt->fetch();
+        return $obj !== false ? $obj : null;
     }
 
     /**
      * @inheritDoc
      */
     public function insert(string $query, array $params = []): int
+    {
+        $stmt = $this->prepareAndExecute($query, $params);
+        return $stmt->rowCount();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function update(string $query, array $params = []): int
     {
         $stmt = $this->prepareAndExecute($query, $params);
         return $stmt->rowCount();

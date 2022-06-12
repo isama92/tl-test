@@ -4,8 +4,8 @@ namespace App\Core\Session;
 
 interface SessionInterface
 {
-    const SESSION_CSRF_TOKEN_KEY = '_token';
-    const CSRF_TOKEN_LENGTH = 40;
+    public const SESSION_CSRF_TOKEN_KEY = '_token';
+    public const CSRF_TOKEN_LENGTH = 40;
 
     /**
      * @return void

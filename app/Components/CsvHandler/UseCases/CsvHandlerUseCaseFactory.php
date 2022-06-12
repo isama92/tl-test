@@ -24,17 +24,17 @@ class CsvHandlerUseCaseFactory implements UseCaseFactoryContract
     }
 
     /**
-     * @return \App\Contracts\UseCaseContract
+     * @return \App\Components\CsvHandler\UseCases\ReadAndShowCsvFile\ReadAndShowCsvFileUseCase
      */
-    public function makeReadAndShowCsvFile(): UseCaseContract
+    public function makeReadAndShowCsvFile(): ReadAndShowCsvFileUseCase
     {
         return new ReadAndShowCsvFileUseCase($this->container);
     }
 
     /**
-     * @return \App\Contracts\UseCaseContract
+     * @return \App\Components\CsvHandler\UseCases\ImportCsvInDb\ImportCsvInDbUseCase
      */
-    public function makeImportCsvInDb(): UseCaseContract
+    public function makeImportCsvInDb(): ImportCsvInDbUseCase
     {
         return new ImportCsvInDbUseCase($this->container);
     }

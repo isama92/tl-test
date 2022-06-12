@@ -4,7 +4,7 @@ namespace App\Core\Storage;
 
 interface StorageInterface
 {
-    const MODE_R = 'r';
+    public const MODE_R = 'r';
 
     /**
      * @param string $filePath

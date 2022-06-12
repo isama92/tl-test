@@ -3,17 +3,11 @@
 namespace App\Components\CsvHandler\UseCases\ReadAndShowCsvFile;
 
 use App\Components\CsvHandler\UseCases\CsvHandlerUseCaseAbstract;
-use App\Components\CsvHandler\UseCases\CsvHandlerUseCaseCollaboratorsFactory;
 use App\Exceptions\Csv\CsvFileNotFoundException;
 use App\Presenters\PresenterInterface;
 
 class ReadAndShowCsvFileUseCase extends CsvHandlerUseCaseAbstract
 {
-    /**
-     * @const Name of the query string parameter where the file name is passed
-     */
-    const QUERY_STRING_FILE_NAME = 'file';
-
     /**
      * @inheritDoc
      * @throws \App\Exceptions\Csv\CsvFileNotFoundException
@@ -53,6 +47,7 @@ class ReadAndShowCsvFileUseCase extends CsvHandlerUseCaseAbstract
 
         $html = $this->container->renderer()->render('csv/index.twig', [
             'queryStringFileName' => self::QUERY_STRING_FILE_NAME,
+            'fieldTextAreaName' => self::CONTENT_TEXTAREA_NAME,
             'filesList' => $csvFiles,
             'activeFileName' => $activeFileName,
             'activeFileContent' => $activeFileContent,
@@ -67,8 +62,8 @@ class ReadAndShowCsvFileUseCase extends CsvHandlerUseCaseAbstract
     /**
      * @inheritDoc
      */
-    protected function createCollaboratorsFactory(): CsvHandlerUseCaseCollaboratorsFactory
+    protected function createCollaboratorsFactory(): CollaboratorsFactory
     {
-        return new CollaboratorsFactory();
+        return new CollaboratorsFactory($this->container);
     }
 }

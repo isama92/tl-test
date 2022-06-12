@@ -28,9 +28,9 @@ class CsvHandlerComponent extends Component implements CsvHandlerComponentInterf
     }
 
     /**
-     * @return \App\Contracts\UseCaseFactoryContract
+     * @return \App\Components\CsvHandler\UseCases\CsvHandlerUseCaseFactory
      */
-    protected function createUseCaseFactory(): UseCaseFactoryContract
+    protected function createUseCaseFactory(): CsvHandlerUseCaseFactory
     {
         return new CsvHandlerUseCaseFactory($this->container);
     }
