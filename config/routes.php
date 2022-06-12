@@ -7,4 +7,7 @@ return [
     '/' => [
         $get => [\App\Controllers\CsvController::class, 'index'],
     ],
+    '/import' => [
+        $post => [\App\Controllers\CsvController::class, 'import'],
+    ],
 ];

@@ -1,0 +1,10 @@
+<div class="mb-5">
+    <ul class="list-group">
+        {% for f in files %}
+            <a class="list-group-item {{ f == activeFileName? 'active' : '2' }}"
+               href="?file={{ f }}">
+                {{ f }}
+            </a>
+        {% endfor %}
+    </ul>
+</div>

@@ -10,6 +10,7 @@ use App\Core\Request\RequestInterface;
 use App\Core\Response\ResponseInterface;
 use App\Core\Router\RouterInterface;
 use App\Core\Session\SessionInterface;
+use App\Core\Storage\StorageInterface;
 use App\FactoryMethods\Config\ConfigFactoryMethod;
 use App\FactoryMethods\Db\DbFactoryMethod;
 use App\FactoryMethods\Renderer\RendererFactoryMethod;
@@ -17,6 +18,7 @@ use App\FactoryMethods\Request\RequestFactoryMethod;
 use App\FactoryMethods\Response\ResponseFactoryMethod;
 use App\FactoryMethods\Router\RouterFactoryMethod;
 use App\FactoryMethods\Session\SessionFactoryMethod;
+use App\FactoryMethods\Storage\StorageFactoryMethod;
 
 class Container extends CoreAbstract implements ContainerInterface
 {
@@ -27,6 +29,7 @@ class Container extends CoreAbstract implements ContainerInterface
     use ResponseFactoryMethod;
     use RendererFactoryMethod;
     use SessionFactoryMethod;
+    use StorageFactoryMethod;
 
     /**
      * @var \App\Core\Config\ConfigInterface
@@ -129,6 +132,16 @@ class Container extends CoreAbstract implements ContainerInterface
     public function session(): SessionInterface
     {
         return $this->singleton(__FUNCTION__);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function storage(): StorageInterface
+    {
+        return $this->singleton(__FUNCTION__, [
+            $this,
+        ]);
     }
 
     /**

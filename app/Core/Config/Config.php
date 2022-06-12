@@ -66,6 +66,7 @@ class Config extends CoreAbstract implements ConfigInterface
         $files = array_filter($files, function ($f) use ($excludeFiles) {
             return !in_array($f, $excludeFiles);
         });
+        $files = array_values($files);
 
         // get configs from files
         $configs = [];

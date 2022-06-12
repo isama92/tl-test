@@ -43,7 +43,7 @@ class VerifyCsrfTokenMiddleware extends Middleware
         $requestToken = $this->getTokenFromRequest($request);
         $sessionToken = $this->getTokenFromSession();
 
-        $match = strlen($sessionToken) === SessionInterface::CSRF_TOKEN_LENGTH
+        $match = strlen($sessionToken) > 0
             && hash_equals($sessionToken, $requestToken);
 
         if(!$match){

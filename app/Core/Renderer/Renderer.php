@@ -4,6 +4,7 @@ namespace App\Core\Renderer;
 
 use App\Core\Container\ContainerInterface;
 use App\Core\CoreAbstract;
+use App\Core\Request\RequestInterface;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -23,6 +24,9 @@ class Renderer extends CoreAbstract implements RendererInterface
      */
     protected string|null $cachePath;
 
+    /**
+     * @var \Twig\Environment
+     */
     protected Environment $twig;
 
     /**
@@ -36,9 +40,15 @@ class Renderer extends CoreAbstract implements RendererInterface
         $this->cachePath = !is_null($configs['cache'])? $rootDir . $configs['cache'] : null;
 
         $this->createTwig();
+
+        $this->twig->addGlobal('csrfField', RequestInterface::REQUEST_CSRF_TOKEN_KEY);
+        $this->twig->addGlobal('csrfValue', $container->session()->token());
     }
 
-    protected function createTwig()
+    /**
+     * @return void
+     */
+    protected function createTwig(): void
     {
         $configs = [];
 

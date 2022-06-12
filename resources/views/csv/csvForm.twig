@@ -1,0 +1,14 @@
+<div class="mb-5">
+    <form action="/import" method="POST">
+        {{ include('partials/csrf.twig') }}
+
+        <div class="mb-3">
+            <label for="inputContent" class="form-label">Csv Content</label>
+            <textarea id="inputContent" class="form-control"
+                      name="content" rows="10"
+            >{{ activeFileContent }}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Import in DB</button>
+    </form>
+</div>
