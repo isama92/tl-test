@@ -1,5 +1,10 @@
 # TeamLiquid Test
 
+## Notes
+- I use the csv ID to see if the row already exists in db and do a upsert.
+- In CSV if the ID is 0 then the row will be inserted as new
+- env production will disable printing of the trace on errors
+
 ## Usage
 To make it run correctly a small setup is needed.
 
@@ -16,6 +21,6 @@ I added some docker images that I used during the development process.
 They are **NOT** safe for production environments (eg. php errors are not disabled).
 
 ## TODOS
-- add form field validations
+- post data validators
+- template error bag
 - logger
-- remove show error from php.ini, log unhandled exceptions to apache error.log

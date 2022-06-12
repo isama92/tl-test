@@ -11,6 +11,7 @@
                       required
             >{{ textareaCsvContent }}</textarea>
             <div class="form-text">CSV string with ';' as separator</div>
+            <div class="form-text">Valid headers: id, author, title</div>
             {% if error is not null %}
                 <div class="invalid-feedback">{{ error }}</div>
             {% endif %}

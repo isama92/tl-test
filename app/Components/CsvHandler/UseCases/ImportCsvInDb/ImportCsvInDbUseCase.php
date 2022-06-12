@@ -39,7 +39,21 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
         }
 
         if (!count($csvArray)) {
-            return $this->handleCsvError($collabFactory, $csvFiles, $csvString, 'Invalid CSV');
+            $errMsg = "Invalid CSV";
+            return $this->handleCsvError($collabFactory, $csvFiles, $csvString, $errMsg);
+        }
+
+        // validate headers
+
+        $headers = array_keys($csvArray[0]);
+        $headersDiff = array_diff($headers, self::CSV_HEADERS);
+        if(count($headersDiff)) {
+            $headersDiff = array_map(function($el) {
+                return "'{$el}'";
+            }, $headersDiff);
+            $headersDiffStr = implode(', ', $headersDiff);
+            $errMsg = "Invalid headers: {$headersDiffStr}";
+            return $this->handleCsvError($collabFactory, $csvFiles, $csvString, $errMsg);
         }
 
         // TODO: validate csv headers and content: it must be a string and have 3 cols with the given headers
@@ -65,8 +79,12 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
         );
     }
 
-    protected function handleCsvError(CollaboratorsFactory $collabFactory, array $csvFiles, string $oldValue, string $error): PresenterInterface
-    {
+    protected function handleCsvError(
+        CollaboratorsFactory $collabFactory,
+        array $csvFiles,
+        string $oldValue,
+        string $error
+    ): PresenterInterface {
         $activeFileName = $this->container->request()->get(self::QUERY_STRING_FILE_NAME);
 
         return $collabFactory->createHtmlPresenter(
