@@ -1,9 +1,59 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Call to an undefined method App\\\\Contracts\\\\UseCaseFactoryContract\\:\\:makeImportCsvInDb\\(\\)\\.$#"
+			count: 1
+			path: app/Components/CsvHandler/CsvHandlerComponent.php
+
+		-
 			message: "#^Call to an undefined method App\\\\Contracts\\\\UseCaseFactoryContract\\:\\:makeReadAndShowCsvFile\\(\\)\\.$#"
 			count: 1
 			path: app/Components/CsvHandler/CsvHandlerComponent.php
+
+		-
+			message: "#^Call to an undefined method App\\\\Contracts\\\\UseCaseFactoryContract\\:\\:makeShowFromDb\\(\\)\\.$#"
+			count: 1
+			path: app/Components/CsvHandler/CsvHandlerComponent.php
+
+		-
+			message: "#^Method App\\\\Components\\\\CsvHandler\\\\Domains\\\\CsvRow\\:\\:getAllValues\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Components/CsvHandler/Domains/CsvRow.php
+
+		-
+			message: "#^Method App\\\\Components\\\\CsvHandler\\\\Domains\\\\CsvRow\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Components/CsvHandler/Domains/CsvRow.php
+
+		-
+			message: "#^Parameter \\#1 \\$id of method App\\\\Components\\\\CsvHandler\\\\Domains\\\\CsvRow\\:\\:setId\\(\\) expects int, int\\|null given\\.$#"
+			count: 1
+			path: app/Components/CsvHandler/Domains/CsvRow.php
+
+		-
+			message: "#^Method App\\\\Components\\\\CsvHandler\\\\Domains\\\\CsvRowInterface\\:\\:getAllValues\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Components/CsvHandler/Domains/CsvRowInterface.php
+
+		-
+			message: "#^Method App\\\\Components\\\\CsvHandler\\\\UseCases\\\\ImportCsvInDb\\\\ImportCsvInDbUseCase\\:\\:execute\\(\\) has parameter \\$requestData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Components/CsvHandler/UseCases/ImportCsvInDb/ImportCsvInDbUseCase.php
+
+		-
+			message: "#^Method App\\\\Components\\\\CsvHandler\\\\UseCases\\\\ImportCsvInDb\\\\ImportCsvInDbUseCase\\:\\:handleCsvError\\(\\) has parameter \\$csvFiles with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Components/CsvHandler/UseCases/ImportCsvInDb/ImportCsvInDbUseCase.php
+
+		-
+			message: "#^Parameter \\#1 \\$id of method App\\\\Components\\\\CsvHandler\\\\Repositories\\\\CsvHandlerRepository\\:\\:upsertCsvRow\\(\\) expects int, int\\|null given\\.$#"
+			count: 1
+			path: app/Components/CsvHandler/UseCases/ImportCsvInDb/ImportCsvInDbUseCase.php
+
+		-
+			message: "#^Parameter \\#3 \\$oldValue of method App\\\\Components\\\\CsvHandler\\\\UseCases\\\\ImportCsvInDb\\\\ImportCsvInDbUseCase\\:\\:handleCsvError\\(\\) expects string, mixed given\\.$#"
+			count: 3
+			path: app/Components/CsvHandler/UseCases/ImportCsvInDb/ImportCsvInDbUseCase.php
 
 		-
 			message: "#^Cannot cast mixed to string\\.$#"
@@ -14,6 +64,16 @@ parameters:
 			message: "#^Method App\\\\Components\\\\CsvHandler\\\\UseCases\\\\ReadAndShowCsvFile\\\\ReadAndShowCsvFileUseCase\\:\\:execute\\(\\) has parameter \\$requestData with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: app/Components/CsvHandler/UseCases/ReadAndShowCsvFile/ReadAndShowCsvFileUseCase.php
+
+		-
+			message: "#^Method App\\\\Components\\\\CsvHandler\\\\UseCases\\\\ShowFromDb\\\\ShowFromDbUseCase\\:\\:execute\\(\\) has parameter \\$requestData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Components/CsvHandler/UseCases/ShowFromDb/ShowFromDbUseCase.php
+
+		-
+			message: "#^Method App\\\\Contracts\\\\ToArrayContract\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Contracts/ToArrayContract.php
 
 		-
 			message: "#^Method App\\\\Contracts\\\\UseCaseContract\\:\\:execute\\(\\) has parameter \\$requestData with no value type specified in iterable type array\\.$#"
@@ -27,6 +87,11 @@ parameters:
 
 		-
 			message: "#^Method App\\\\Core\\\\Container\\\\Container\\:\\:db\\(\\) should return App\\\\Core\\\\Db\\\\DbInterface but returns mixed\\.$#"
+			count: 1
+			path: app/Core/Container/Container.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Container\\\\Container\\:\\:logger\\(\\) should return App\\\\Core\\\\Logger\\\\LoggerInterface but returns mixed\\.$#"
 			count: 1
 			path: app/Core/Container/Container.php
 
@@ -77,7 +142,7 @@ parameters:
 
 		-
 			message: "#^Cannot call method rowCount\\(\\) on PDOStatement\\|false\\.$#"
-			count: 2
+			count: 3
 			path: app/Core/Db/Db.php
 
 		-
@@ -116,7 +181,12 @@ parameters:
 			path: app/Core/Db/Db.php
 
 		-
-			message: "#^Method App\\\\Core\\\\Db\\\\Db\\:\\:selectOne\\(\\) should return object but returns mixed\\.$#"
+			message: "#^Method App\\\\Core\\\\Db\\\\Db\\:\\:selectOne\\(\\) should return object\\|null but returns mixed\\.$#"
+			count: 1
+			path: app/Core/Db/Db.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Db\\\\Db\\:\\:update\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: app/Core/Db/Db.php
 
@@ -144,6 +214,16 @@ parameters:
 			message: "#^Method App\\\\Core\\\\Db\\\\DbInterface\\:\\:selectOne\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: app/Core/Db/DbInterface.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Db\\\\DbInterface\\:\\:update\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Core/Db/DbInterface.php
+
+		-
+			message: "#^Property App\\\\Core\\\\Logger\\\\Logger\\:\\:\\$loggingPath \\(string\\) does not accept mixed\\.$#"
+			count: 1
+			path: app/Core/Logger/Logger.php
 
 		-
 			message: "#^Cannot access offset 'cache' on mixed\\.$#"
@@ -271,7 +351,12 @@ parameters:
 			path: app/Core/Session/Session.php
 
 		-
-			message: "#^Cannot access offset \\(int\\|string\\) on array\\|false\\.$#"
+			message: "#^Argument of an invalid type array\\|null supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: app/Core/Storage/Storage.php
+
+		-
+			message: "#^Cannot access offset mixed on array\\|false\\|null\\.$#"
 			count: 1
 			path: app/Core/Storage/Storage.php
 
@@ -286,16 +371,6 @@ parameters:
 			path: app/Core/Storage/Storage.php
 
 		-
-			message: "#^Parameter \\#1 \\$stream of function fclose expects resource, resource\\|false given\\.$#"
-			count: 1
-			path: app/Core/Storage/Storage.php
-
-		-
-			message: "#^Parameter \\#1 \\$stream of function fgetcsv expects resource, resource\\|false given\\.$#"
-			count: 2
-			path: app/Core/Storage/Storage.php
-
-		-
 			message: "#^Method App\\\\Core\\\\Storage\\\\StorageInterface\\:\\:getCsv\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: app/Core/Storage/StorageInterface.php
@@ -304,6 +379,11 @@ parameters:
 			message: "#^Method App\\\\Core\\\\Storage\\\\StorageInterface\\:\\:list\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: app/Core/Storage/StorageInterface.php
+
+		-
+			message: "#^Method App\\\\Helpers\\\\ParserHelper\\:\\:csvToArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: app/Helpers/ParserHelper.php
 
 		-
 			message: "#^Cannot cast mixed to string\\.$#"
@@ -334,6 +414,11 @@ parameters:
 			message: "#^Cannot cast mixed to string\\.$#"
 			count: 1
 			path: app/Middlewares/TrimStringsMiddleware.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function substr expects string, string\\|false given\\.$#"
+			count: 1
+			path: app/Middlewares/ValidatePostSizeMiddleware.php
 
 		-
 			message: "#^Cannot cast array to string\\.$#"

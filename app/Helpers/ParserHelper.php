@@ -22,6 +22,7 @@ class ParserHelper
     ): array {
         // split csv string rows
         $lines = preg_split('/\r\n|[\r\n]/', $str);
+        $lines = $lines !== false ? $lines : [];
         $arr = [];
 
         // extract data from the csv string single line
@@ -43,7 +44,7 @@ class ParserHelper
         foreach ($arr as $row) {
             $rowData = [];
             foreach ($row as $i => $col) {
-                if(array_key_exists($i, $headers)) {
+                if (array_key_exists($i, $headers)) {
                     $rowData[$headers[$i]] = $col;
                 }
             }

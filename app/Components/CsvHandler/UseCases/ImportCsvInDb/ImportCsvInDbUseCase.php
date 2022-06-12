@@ -56,7 +56,7 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
 
         if (count($notIntIds)) {
             $notIntIdsKeys = array_keys($notIntIds);
-            $notIntIdsKeys = array_map(function($el) {
+            $notIntIdsKeys = array_map(function ($el) {
                 return $el + 2;
             }, $notIntIdsKeys);
             $notIntIdsKeysStr = implode(', ', $notIntIdsKeys);
