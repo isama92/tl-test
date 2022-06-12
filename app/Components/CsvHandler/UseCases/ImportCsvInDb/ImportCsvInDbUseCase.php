@@ -33,13 +33,34 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
 
         $csvFiles = $storage->list(self::STORAGE_CSV_DIR);
 
+        // csv string to array
+
         $csvArray = [];
         if (is_string($csvString)) {
             $csvArray = $parserHelper->csvToArray($csvString, self::CSV_SEPARATOR);
         }
 
+        // if csv array is empty then is not valid
+
         if (!count($csvArray)) {
             $errMsg = "Invalid CSV";
+            return $this->handleCsvError($collabFactory, $csvFiles, $csvString, $errMsg);
+        }
+
+        // validate id column
+
+        $ids = array_column($csvArray, self::CSV_HEADER_ID);
+        $notIntIds = array_filter($ids, function ($el) {
+            return $el !== ((string)(int)$el);
+        });
+
+        if (count($notIntIds)) {
+            $notIntIdsKeys = array_keys($notIntIds);
+            $notIntIdsKeys = array_map(function($el) {
+                return $el + 2;
+            }, $notIntIdsKeys);
+            $notIntIdsKeysStr = implode(', ', $notIntIdsKeys);
+            $errMsg = "All id values must be of type integer, check the following lines: {$notIntIdsKeysStr}";
             return $this->handleCsvError($collabFactory, $csvFiles, $csvString, $errMsg);
         }
 
@@ -56,7 +77,7 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
             return $this->handleCsvError($collabFactory, $csvFiles, $csvString, $errMsg);
         }
 
-        // TODO: validate csv headers and content: it must be a string and have 3 cols with the given headers
+        // write to db
 
         foreach ($csvArray as $csvArrayRow) {
             $csvRow = $collabFactory->createCsvRow(
@@ -67,6 +88,8 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
             $queryAffectedRows = $repo->upsertCsvRow($csvRow->getId(), $csvRow);
             $affectedRows->sum($queryAffectedRows);
         }
+
+        // output
 
         return $collabFactory->createHtmlPresenter(
             $this->container->renderer()->render('csv/import.twig', [

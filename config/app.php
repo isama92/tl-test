@@ -13,7 +13,10 @@ return [
         \App\Middlewares\StartSessionMiddleware::class,
         \App\Middlewares\ValidatePostSizeMiddleware::class,
         \App\Middlewares\TrimStringsMiddleware::class,
-        \App\Middlewares\StripStringsMiddleware::class,
+
+        // it breaks csv parsing if no enclosure char is set
+        //\App\Middlewares\StripStringsMiddleware::class,
+
         \App\Middlewares\ConvertEmptyStringsToNullMiddleware::class,
         \App\Middlewares\VerifyCsrfTokenMiddleware::class,
     ],
