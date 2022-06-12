@@ -124,7 +124,7 @@ class Router extends CoreAbstract implements RouterInterface
     {
         [$controllerName, $controllerMethod] = $this->resolveController($request);
         $controller = new $controllerName($this->container);
-        $presenter = $controller->{$controllerMethod}();
+        $presenter = $controller->{$controllerMethod}($request);
         return $presenter->present();
     }
 
