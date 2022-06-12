@@ -3,7 +3,7 @@
 // env
 $defaultEnvValue = \App\Core\Config\ConfigInterface::ENV_PRODUCTION;
 $env = strtolower($_ENV['ENV'] ?? $defaultEnvValue);
-if(!in_array($env, \App\Core\Config\ConfigInterface::ENVS)) {
+if (!in_array($env, \App\Core\Config\ConfigInterface::ENVS)) {
     $env = $defaultEnvValue;
 }
 

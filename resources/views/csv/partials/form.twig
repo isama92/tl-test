@@ -1,15 +1,19 @@
 <div class="mb-5">
     <h2 class="h5 pb-2">Form</h2>
-    <form action="/import" method="POST">
+    <form action="/" method="POST">
         {{ include('partials/csrf.twig') }}
 
         <div class="mb-3">
-            <label for="inputContent" class="form-label">Csv Content</label>
-            <textarea id="inputContent" class="form-control"
+            <label for="contentInput" class="form-label">Csv Content</label>
+            <textarea id="contentInput" class="form-control {{ error is not null? 'is-invalid' : '' }}"
                       name="content" rows="10"
                       aria-describedby="contentHelp"
+                      required
             >{{ textareaCsvContent }}</textarea>
-            <div id="contentHelp" class="form-text">CSV string with ';' as separator</div>
+            <div class="form-text">CSV string with ';' as separator</div>
+            {% if error is not null %}
+                <div class="invalid-feedback">{{ error }}</div>
+            {% endif %}
         </div>
 
         <button type="submit" class="btn btn-primary">Import string into DB</button>

@@ -116,7 +116,7 @@ class CsvHandlerRepository extends Repository implements CsvHandlerRepositoryInt
 
         $dbRows = $this->db->select("SELECT * FROM {$this->table}");
 
-        foreach($dbRows as $row) {
+        foreach ($dbRows as $row) {
             $data[] = $this->createCsvRow(
                 $row->{CsvRowInterface::AUTHOR},
                 $row->{CsvRowInterface::TITLE},

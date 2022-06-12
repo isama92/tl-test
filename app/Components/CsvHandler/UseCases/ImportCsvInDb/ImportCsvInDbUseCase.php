@@ -22,7 +22,7 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
      */
     public function execute(array $requestData = []): PresenterInterface
     {
-        $csvString = $this->container->request()->post(self::CONTENT_TEXTAREA_NAME);
+        $csvString = $this->container->request()->post(self::CONTENT_TEXTAREA_NAME, '');
 
         $collabFactory = $this->createCollaboratorsFactory();
 
@@ -34,21 +34,12 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
         $csvFiles = $storage->list(self::STORAGE_CSV_DIR);
 
         $csvArray = [];
-        if(is_string($csvString)) {
+        if (is_string($csvString)) {
             $csvArray = $parserHelper->csvToArray($csvString, self::CSV_SEPARATOR);
         }
 
-        if(!count($csvArray)) {
-            // TODO: add errors
-            return $collabFactory->createHtmlPresenter(
-                $this->container->renderer()->render('csv/import.twig', [
-                    'queryStringFileName' => self::QUERY_STRING_FILE_NAME,
-                    'fieldTextAreaName' => self::CONTENT_TEXTAREA_NAME,
-                    'filesList' => $csvFiles,
-                    'affectedRows' => $affectedRows,
-                    'textareaCsvContent' => $csvString,
-                ])
-            );
+        if (!count($csvArray)) {
+            return $this->handleCsvError($collabFactory, $csvFiles, $csvString, 'Invalid CSV');
         }
 
         // TODO: validate csv headers and content: it must be a string and have 3 cols with the given headers
@@ -70,6 +61,22 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
                 'filesList' => $csvFiles,
                 'affectedRows' => $affectedRows,
                 'textareaCsvContent' => $csvString,
+            ])
+        );
+    }
+
+    protected function handleCsvError(CollaboratorsFactory $collabFactory, array $csvFiles, string $oldValue, string $error): PresenterInterface
+    {
+        $activeFileName = $this->container->request()->get(self::QUERY_STRING_FILE_NAME);
+
+        return $collabFactory->createHtmlPresenter(
+            $this->container->renderer()->render('csv/index.twig', [
+                'queryStringFileName' => self::QUERY_STRING_FILE_NAME,
+                'fieldTextAreaName' => self::CONTENT_TEXTAREA_NAME,
+                'filesList' => $csvFiles,
+                'listActiveCsv' => $activeFileName,
+                'textareaCsvContent' => $oldValue,
+                'error' => $error,
             ])
         );
     }

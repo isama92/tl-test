@@ -18,12 +18,12 @@ class ShowFromDbUseCase extends CsvHandlerUseCaseAbstract
 
         $csvRows = $repo->all();
 
-        $tableRows = array_map(function($el) {
+        $tableRows = array_map(function ($el) {
             return $el->toArray();
         }, $csvRows);
 
         $tableHeaders = [];
-        if(count($tableRows) > 0) {
+        if (count($tableRows) > 0) {
             $tableHeaders = array_keys($tableRows[0]);
         }
 

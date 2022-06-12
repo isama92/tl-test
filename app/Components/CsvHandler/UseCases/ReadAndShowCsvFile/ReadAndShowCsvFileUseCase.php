@@ -47,7 +47,7 @@ class ReadAndShowCsvFileUseCase extends CsvHandlerUseCaseAbstract
         }
 
         return $collabFactory->createHtmlPresenter(
-                $this->container->renderer()->render('csv/index.twig', [
+            $this->container->renderer()->render('csv/index.twig', [
                     'queryStringFileName' => self::QUERY_STRING_FILE_NAME,
                     'fieldTextAreaName' => self::CONTENT_TEXTAREA_NAME,
                     'filesList' => $csvFiles,
@@ -56,7 +56,7 @@ class ReadAndShowCsvFileUseCase extends CsvHandlerUseCaseAbstract
                     'tableArrayRows' => $activeFileArray,
                     'tableArrayHeaders' => $activeFileHeaders,
                 ])
-            );
+        );
     }
 
     /**

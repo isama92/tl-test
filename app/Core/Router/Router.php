@@ -154,7 +154,7 @@ class Router extends CoreAbstract implements RouterInterface
         $errorPage = $this->container->renderer()->render('error.twig', [
             'statusCode' => $status,
             'message' => $e->getMessage(),
-            'trace' => $this->container->config()->isLocal()? $e->getTraceAsString() : '',
+            'trace' => $this->container->config()->isLocal() ? $e->getTraceAsString() : '',
         ]);
 
         $presenter = $this->createHtmlPresenter($errorPage, $status);
