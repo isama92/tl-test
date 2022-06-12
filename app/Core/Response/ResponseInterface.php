@@ -34,12 +34,12 @@ interface ResponseInterface
      *
      * @return void
      */
-    public function setStatus(int $statusCode): void;
+    public function setStatusCode(int $statusCode): void;
 
     /**
      * @return int
      */
-    public function getStatus(): int;
+    public function getStatusCode(): int;
 
     /**
      * @return string

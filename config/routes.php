@@ -5,9 +5,9 @@ $post = \App\Core\Request\RequestInterface::METHOD_POST;
 
 return [
     '/' => [
-        $get => [\App\Controllers\CsvController::class, 'index'],
+        $get => [\App\Controllers\CsvHandlerController::class, 'index'],
     ],
     '/import' => [
-        $post => [\App\Controllers\CsvController::class, 'import'],
+        $post => [\App\Controllers\CsvHandlerController::class, 'import'],
     ],
 ];

@@ -122,13 +122,10 @@ class Router extends CoreAbstract implements RouterInterface
      */
     protected function dispatchToController(RequestInterface $request): ResponseInterface
     {
-        $response = $this->container->response();
-        $response->setStatus($response::HTTP_STATUS_CODE_OK);
-
         [$controllerName, $controllerMethod] = $this->resolveController($request);
         $controller = new $controllerName($this->container);
-        $response->setResponse($controller->{$controllerMethod}());
-        return $response;
+        $presenter = $controller->{$controllerMethod}();
+        return $presenter->present();
     }
 
     /**
@@ -151,7 +148,7 @@ class Router extends CoreAbstract implements RouterInterface
             'message' => $e->getMessage(),
         ]);
 
-        $response->setStatus($status);
+        $response->setStatusCode($status);
         $response->setResponse($errorPage);
         return $response;
     }

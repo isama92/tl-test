@@ -16,5 +16,6 @@ I added some docker images that I used during the development process.
 They are **NOT** safe for production environments (eg. php errors are not disabled).
 
 ## TODOS
+- add form field validations
 - logger
 - remove show error from php.ini, log unhandled exceptions to apache error.log
