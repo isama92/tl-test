@@ -1,0 +1,27 @@
+[2022-06-12 20:53:45] App\Exceptions\Csv\CsvFileNotFoundException: There are no CSV file named 'test.csvx' in /var/www/html/app/Components/CsvHandler/UseCases/ReadAndShowCsvFile/ReadAndShowCsvFileUseCase.php:36
+Stack trace:
+#0 /var/www/html/app/Components/CsvHandler/CsvHandlerComponent.php(18): App\Components\CsvHandler\UseCases\ReadAndShowCsvFile\ReadAndShowCsvFileUseCase->execute()
+#1 /var/www/html/app/Controllers/CsvHandlerController.php(16): App\Components\CsvHandler\CsvHandlerComponent->readAndShowCsvFile()
+#2 /var/www/html/app/Core/Router/Router.php(135): App\Controllers\CsvHandlerController->index(Object(App\Core\Request\Request))
+#3 /var/www/html/app/Core/Router/Router.php(202): App\Core\Router\Router->dispatchToController(Object(App\Core\Request\Request))
+#4 /var/www/html/app/Core/App/App.php(34): App\Core\Router\Router->handle()
+#5 /var/www/html/public/index.php(17): App\Core\App\App->run()
+#6 {main}
+[2022-06-12 20:53:49] App\Exceptions\Csv\CsvFileNotFoundException: There are no CSV file named 'test.csvx' in /var/www/html/app/Components/CsvHandler/UseCases/ReadAndShowCsvFile/ReadAndShowCsvFileUseCase.php:36
+Stack trace:
+#0 /var/www/html/app/Components/CsvHandler/CsvHandlerComponent.php(18): App\Components\CsvHandler\UseCases\ReadAndShowCsvFile\ReadAndShowCsvFileUseCase->execute()
+#1 /var/www/html/app/Controllers/CsvHandlerController.php(16): App\Components\CsvHandler\CsvHandlerComponent->readAndShowCsvFile()
+#2 /var/www/html/app/Core/Router/Router.php(135): App\Controllers\CsvHandlerController->index(Object(App\Core\Request\Request))
+#3 /var/www/html/app/Core/Router/Router.php(202): App\Core\Router\Router->dispatchToController(Object(App\Core\Request\Request))
+#4 /var/www/html/app/Core/App/App.php(34): App\Core\Router\Router->handle()
+#5 /var/www/html/public/index.php(17): App\Core\App\App->run()
+#6 {main}
+[2022-06-12 20:54:11] App\Exceptions\Csv\CsvFileNotFoundException: There are no CSV file named 'test.csvx' in /var/www/html/app/Components/CsvHandler/UseCases/ReadAndShowCsvFile/ReadAndShowCsvFileUseCase.php:36
+Stack trace:
+#0 /var/www/html/app/Components/CsvHandler/CsvHandlerComponent.php(18): App\Components\CsvHandler\UseCases\ReadAndShowCsvFile\ReadAndShowCsvFileUseCase->execute()
+#1 /var/www/html/app/Controllers/CsvHandlerController.php(16): App\Components\CsvHandler\CsvHandlerComponent->readAndShowCsvFile()
+#2 /var/www/html/app/Core/Router/Router.php(135): App\Controllers\CsvHandlerController->index(Object(App\Core\Request\Request))
+#3 /var/www/html/app/Core/Router/Router.php(202): App\Core\Router\Router->dispatchToController(Object(App\Core\Request\Request))
+#4 /var/www/html/app/Core/App/App.php(34): App\Core\Router\Router->handle()
+#5 /var/www/html/public/index.php(17): App\Core\App\App->run()
+#6 {main}

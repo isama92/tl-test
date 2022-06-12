@@ -201,7 +201,7 @@ class Router extends CoreAbstract implements RouterInterface
             $request = $this->dispatchToMiddlewares($request);
             $response = $this->dispatchToController($request);
         } catch (Throwable $e) {
-            // TODO: log exception message and trace
+            $this->container->logger()->error($e);
             $response = $this->dispatchToErrorHandler($request, $e);
         }
 

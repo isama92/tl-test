@@ -23,4 +23,4 @@ They are **NOT** safe for production environments (eg. php errors are not disabl
 ## TODOS
 - post data validators
 - template error bag
-- logger
+- add logger formatters to format log messages

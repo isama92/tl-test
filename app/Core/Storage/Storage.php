@@ -5,6 +5,8 @@ namespace App\Core\Storage;
 use App\Core\Container\ContainerInterface;
 use App\Core\CoreAbstract;
 use App\Exceptions\Storage\FileNotFoundException;
+use App\Exceptions\Storage\InvalidModeException;
+use SplFileObject;
 
 class Storage extends CoreAbstract implements StorageInterface
 {
@@ -18,6 +20,9 @@ class Storage extends CoreAbstract implements StorageInterface
      */
     protected string $storagePath;
 
+    /**
+     * @param \App\Core\Container\ContainerInterface $container
+     */
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
@@ -26,30 +31,57 @@ class Storage extends CoreAbstract implements StorageInterface
 
     /**
      * @inheritDoc
+     * @throws \App\Exceptions\Storage\InvalidModeException
+     * @throws \App\Exceptions\Storage\FileNotFoundException
      */
     public function get(string $filePath): string
     {
-        $path = $this->storagePath . $filePath;
-        $content = file_get_contents($path);
+        if (!$this->exists($filePath)) {
+            throw new FileNotFoundException($filePath);
+        }
+
+        $fullFilePath = $this->storagePath . $filePath;
+        $fh = $this->createSqlFileObject($fullFilePath, self::MODE_R);
+        $size = $fh->getSize();
+        $content = $size > 0 ? $fh->fread($size) : false;
         return $content === false ? '' : $content;
     }
 
     /**
      * @inheritDoc
+     * @throws \App\Exceptions\Storage\InvalidModeException
      */
     public function put(string $filePath, string $content): void
     {
-        $path = $this->storagePath . $filePath;
-        file_put_contents($path, $content);
+        $fullFilePath = $this->storagePath . $filePath;
+
+        $this->createDirIfNotExists($filePath);
+
+        $fh = $this->createSqlFileObject($fullFilePath, self::MODE_W);
+        $fh->fwrite($content);
+    }
+
+    /**
+     * @inheritDoc
+     * @throws \App\Exceptions\Storage\InvalidModeException
+     */
+    public function append(string $filePath, string $content): void
+    {
+        $fullFilePath = $this->storagePath . $filePath;
+
+        $this->createDirIfNotExists($filePath);
+
+        $fh = $this->createSqlFileObject($fullFilePath, self::MODE_A);
+        $fh->fwrite($content);
     }
 
     /**
      * @inheritDoc
      */
-    public function has(string $filePath): bool
+    public function exists(string $filePath): bool
     {
-        $path = $this->storagePath . $filePath;
-        return file_exists($path);
+        $fullFilePath = $this->storagePath . $filePath;
+        return file_exists($fullFilePath);
     }
 
     /**
@@ -72,6 +104,7 @@ class Storage extends CoreAbstract implements StorageInterface
     /**
      * @inheritDoc
      * @throws \App\Exceptions\Storage\FileNotFoundException
+     * @throws \App\Exceptions\Storage\InvalidModeException
      */
     public function getCsv(
         string $filePath,
@@ -80,20 +113,20 @@ class Storage extends CoreAbstract implements StorageInterface
         string $escape = '\\',
         bool $hasHeaders = true
     ): array {
-        if (!$this->has($filePath)) {
+        if (!$this->exists($filePath)) {
             throw new FileNotFoundException($filePath);
         }
 
-        $path = $this->storagePath . $filePath;
-        $fh = fopen($path, self::MODE_R);
+        $fullFilePath = $this->storagePath . $filePath;
+        $fh = $this->createSqlFileObject($fullFilePath, self::MODE_R);
         $data = [];
 
         $headers = [];
         if ($hasHeaders) {
-            $headers = fgetcsv($fh, null, $separator, $enclosure, $escape);
+            $headers = $fh->fgetcsv($separator, $enclosure, $escape);
         }
 
-        while (($row = fgetcsv($fh, null, $separator, $enclosure, $escape)) !== false) {
+        while (($row = $fh->fgetcsv($separator, $enclosure, $escape)) !== false) {
             $rowData = [];
             foreach ($row as $i => $v) {
                 $key = $hasHeaders ? $headers[$i] : $i;
@@ -102,8 +135,35 @@ class Storage extends CoreAbstract implements StorageInterface
             $data[] = $rowData;
         }
 
-        fclose($fh);
-
         return $data;
+    }
+
+    /**
+     * @param string $filePath
+     *
+     * @return void
+     */
+    protected function createDirIfNotExists(string $filePath): void
+    {
+        $fullFilePath = $this->storagePath . $filePath;
+        $dir = pathinfo($fullFilePath, PATHINFO_DIRNAME);
+        if (!$this->exists($filePath)) {
+            mkdir($dir);
+        }
+    }
+
+    /**
+     * @param string $fullFilePath
+     * @param string $mode
+     *
+     * @return \SplFileObject
+     * @throws \App\Exceptions\Storage\InvalidModeException
+     */
+    protected function createSqlFileObject(string $fullFilePath, string $mode): SplFileObject
+    {
+        if (!in_array($mode, self::MODES)) {
+            throw new InvalidModeException($mode);
+        }
+        return new SplFileObject($fullFilePath, $mode);
     }
 }

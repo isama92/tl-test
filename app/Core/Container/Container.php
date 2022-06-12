@@ -5,6 +5,7 @@ namespace App\Core\Container;
 use App\Core\CoreAbstract;
 use App\Core\Config\ConfigInterface;
 use App\Core\Db\DbInterface;
+use App\Core\Logger\LoggerInterface;
 use App\Core\Renderer\RendererInterface;
 use App\Core\Request\RequestInterface;
 use App\Core\Response\ResponseInterface;
@@ -13,6 +14,7 @@ use App\Core\Session\SessionInterface;
 use App\Core\Storage\StorageInterface;
 use App\FactoryMethods\Config\ConfigFactoryMethod;
 use App\FactoryMethods\Db\DbFactoryMethod;
+use App\FactoryMethods\Logger\LoggerFactoryMethod;
 use App\FactoryMethods\Renderer\RendererFactoryMethod;
 use App\FactoryMethods\Request\RequestFactoryMethod;
 use App\FactoryMethods\Response\ResponseFactoryMethod;
@@ -30,6 +32,7 @@ class Container extends CoreAbstract implements ContainerInterface
     use RendererFactoryMethod;
     use SessionFactoryMethod;
     use StorageFactoryMethod;
+    use LoggerFactoryMethod;
 
     /**
      * @var \App\Core\Config\ConfigInterface
@@ -138,6 +141,16 @@ class Container extends CoreAbstract implements ContainerInterface
      * @inheritDoc
      */
     public function storage(): StorageInterface
+    {
+        return $this->singleton(__FUNCTION__, [
+            $this,
+        ]);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function logger(): LoggerInterface
     {
         return $this->singleton(__FUNCTION__, [
             $this,

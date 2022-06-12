@@ -5,6 +5,10 @@ namespace App\Core\Storage;
 interface StorageInterface
 {
     public const MODE_R = 'r';
+    public const MODE_A = 'a';
+    public const MODE_W = 'w';
+
+    public const MODES = [self::MODE_R, self::MODE_W, self::MODE_A];
 
     /**
      * @param string $filePath
@@ -23,10 +27,18 @@ interface StorageInterface
 
     /**
      * @param string $filePath
+     * @param string $content
+     *
+     * @return void
+     */
+    public function append(string $filePath, string $content): void;
+
+    /**
+     * @param string $filePath
      *
      * @return bool
      */
-    public function has(string $filePath): bool;
+    public function exists(string $filePath): bool;
 
     /**
      * @param string $dirPath

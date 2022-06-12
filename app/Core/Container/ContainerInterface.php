@@ -4,6 +4,7 @@ namespace App\Core\Container;
 
 use App\Core\Config\ConfigInterface;
 use App\Core\Db\DbInterface;
+use App\Core\Logger\LoggerInterface;
 use App\Core\Renderer\RendererInterface;
 use App\Core\Request\RequestInterface;
 use App\Core\Response\ResponseInterface;
@@ -57,4 +58,9 @@ interface ContainerInterface
      * @return \App\Core\Storage\StorageInterface
      */
     public function storage(): StorageInterface;
+
+    /**
+     * @return \App\Core\Logger\LoggerInterface
+     */
+    public function logger(): LoggerInterface;
 }

@@ -47,8 +47,8 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
 
         $headers = array_keys($csvArray[0]);
         $headersDiff = array_diff($headers, self::CSV_HEADERS);
-        if(count($headersDiff)) {
-            $headersDiff = array_map(function($el) {
+        if (count($headersDiff)) {
+            $headersDiff = array_map(function ($el) {
                 return "'{$el}'";
             }, $headersDiff);
             $headersDiffStr = implode(', ', $headersDiff);
