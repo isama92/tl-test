@@ -22,3 +22,7 @@ coverage/
 
 # cache
 storage/cache/
+
+# build
+public/assets/js/
+public/assets/css/

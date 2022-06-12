@@ -1,1 +1,0 @@
-var init=function(){console.log("JS init ready")};document.addEventListener("DOMContentLoaded",init);
