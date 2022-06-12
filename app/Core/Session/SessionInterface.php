@@ -4,6 +4,9 @@ namespace App\Core\Session;
 
 interface SessionInterface
 {
+    const SESSION_CSRF_TOKEN_KEY = '_token';
+    const CSRF_TOKEN_LENGTH = 40;
+
     /**
      * @return void
      */
@@ -22,12 +25,12 @@ interface SessionInterface
     public function has(string $name): bool;
 
     /**
-     * @param string $name
-     * @param mixed  $defaultValue
+     * @param string     $name
+     * @param mixed|null $defaultValue
      *
      * @return mixed
      */
-    public function get(string $name, mixed $defaultValue): mixed;
+    public function get(string $name, mixed $defaultValue = null): mixed;
 
     /**
      * @param string $name
@@ -43,4 +46,23 @@ interface SessionInterface
      * @return void
      */
     public function remove(string $name): void;
+
+    /**
+     * Get CSRF token
+     *
+     * @return string
+     */
+    public function token(): string;
+
+    /**
+     * Generate CSRF token
+     *
+     * @return void
+     */
+    public function regenerateToken(): void;
+
+    /**
+     * @return bool
+     */
+    public function hasStarted(): bool;
 }

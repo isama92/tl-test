@@ -16,6 +16,7 @@ use App\FactoryMethods\Renderer\RendererFactoryMethod;
 use App\FactoryMethods\Request\RequestFactoryMethod;
 use App\FactoryMethods\Response\ResponseFactoryMethod;
 use App\FactoryMethods\Router\RouterFactoryMethod;
+use App\FactoryMethods\Session\SessionFactoryMethod;
 
 class Container extends CoreAbstract implements ContainerInterface
 {
@@ -25,6 +26,7 @@ class Container extends CoreAbstract implements ContainerInterface
     use RequestFactoryMethod;
     use ResponseFactoryMethod;
     use RendererFactoryMethod;
+    use SessionFactoryMethod;
 
     /**
      * @var \App\Core\Config\ConfigInterface

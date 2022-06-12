@@ -5,7 +5,7 @@ namespace App\FactoryMethods\Session;
 use App\Core\Session\Session;
 use App\Core\Session\SessionInterface;
 
-class SessionFactoryMethod
+trait SessionFactoryMethod
 {
     /**
      * @return \App\Core\Session\SessionInterface

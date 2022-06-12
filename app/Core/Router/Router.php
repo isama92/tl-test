@@ -113,33 +113,87 @@ class Router extends CoreAbstract implements RouterInterface
     }
 
     /**
-     * @inheritDoc
+     * @param \App\Core\Request\RequestInterface $request
+     *
+     * @return \App\Core\Response\ResponseInterface
      * @throws \App\Exceptions\Router\ControllerNotFoundException
+     * @throws \App\Exceptions\Router\RouteMethodNotFoundException
+     * @throws \App\Exceptions\Router\RouteNotFoundException
+     */
+    protected function dispatchToController(RequestInterface $request): ResponseInterface
+    {
+        $response = $this->container->response();
+        $response->setStatus($response::HTTP_STATUS_CODE_OK);
+
+        [$controllerName, $controllerMethod] = $this->resolveController($request);
+        $controller = new $controllerName($this->container);
+        $response->setResponse($controller->{$controllerMethod}());
+        return $response;
+    }
+
+    /**
+     * @param \App\Core\Request\RequestInterface $request
+     * @param \Throwable                         $e
+     *
+     * @return \App\Core\Response\ResponseInterface
+     */
+    protected function dispatchToErrorHandler(RequestInterface $request, Throwable $e): ResponseInterface
+    {
+        $response = $this->container->response();
+
+        $status = $response::HTTP_STATUS_CODE_ERROR;
+        if($e instanceof ExceptionAbstract) {
+            $status = $e->getStatusCode();
+        }
+
+        $errorPage = $this->container->renderer()->render('error.twig', [
+            'statusCode' => $status,
+            'message' => $e->getMessage(),
+        ]);
+
+        $response->setStatus($status);
+        $response->setResponse($errorPage);
+        return $response;
+    }
+
+    /**
+     * @param \App\Core\Request\RequestInterface $request
+     *
+     * @return \App\Core\Request\RequestInterface
+     */
+    protected function dispatchToMiddlewares(RequestInterface $request): RequestInterface
+    {
+        $middlewares = $this->container->config()->get('app.middlewares');
+
+        $firstMiddleware = null;
+        $lastMiddleware = null;
+        foreach($middlewares as $m) {
+            $middleware = new $m($this->container);
+            if(!is_null($lastMiddleware)) {
+                $lastMiddleware->setNext($middleware);
+            } else {
+                $firstMiddleware = $middleware;
+            }
+            $lastMiddleware = $middleware;
+        }
+
+        return $firstMiddleware->execute($request);
+    }
+
+    /**
+     * @inheritDoc
      */
     public function handle(): ResponseInterface
     {
         $request = $this->container->request();
-        $response = $this->container->response();
-        $response->setStatus($response::HTTP_STATUS_CODE_OK);
+
 
         try {
-            [$controllerName, $controllerMethod] = $this->resolveController($request);
-            $controller = new $controllerName($this->container);
-            $response->setResponse($controller->{$controllerMethod}());
+            $request = $this->dispatchToMiddlewares($request);
+            $response = $this->dispatchToController($request);
         } catch(Throwable $e) {
             // TODO: log exception message and trace
-            $status = $response::HTTP_STATUS_CODE_ERROR;
-            if($e instanceof ExceptionAbstract) {
-                $status = $e->getStatusCode();
-            }
-
-            $errorPage = $this->container->renderer()->render('error.twig', [
-                'statusCode' => $status,
-                'message' => $e->getMessage(),
-            ]);
-
-            $response->setStatus($status);
-            $response->setResponse($errorPage);
+            $response = $this->dispatchToErrorHandler($request, $e);
         }
 
         return $response;
