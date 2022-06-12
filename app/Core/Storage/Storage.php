@@ -83,14 +83,14 @@ class Storage extends CoreAbstract implements StorageInterface
         $data = [];
 
         $headers = [];
-        if($hasHeaders) {
+        if ($hasHeaders) {
             $headers = fgetcsv($fh, null, $separator, $enclosure, $escape);
         }
 
-        while(($row = fgetcsv($fh, null, $separator, $enclosure, $escape)) !== false) {
+        while (($row = fgetcsv($fh, null, $separator, $enclosure, $escape)) !== false) {
             $rowData = [];
-            foreach($row as $i => $v) {
-                $key = $hasHeaders? $headers[$i] : $i;
+            foreach ($row as $i => $v) {
+                $key = $hasHeaders ? $headers[$i] : $i;
                 $rowData[$key] = $v;
             }
             $data[] = $rowData;

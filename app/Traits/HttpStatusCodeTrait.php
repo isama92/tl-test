@@ -20,7 +20,7 @@ trait HttpStatusCodeTrait
      */
     public function setStatusCode(int $statusCode): void
     {
-        if(!in_array($statusCode, ResponseInterface::HTTP_STATUS)) {
+        if (!in_array($statusCode, ResponseInterface::HTTP_STATUS)) {
             throw new InvalidStatusCodeException($statusCode);
         }
         $this->statusCode = $statusCode;

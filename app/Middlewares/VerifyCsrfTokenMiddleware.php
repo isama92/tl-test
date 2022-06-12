@@ -32,11 +32,13 @@ class VerifyCsrfTokenMiddleware extends Middleware
      */
     protected function handle(RequestInterface $request): RequestInterface
     {
-        if(in_array($request->getMethod(), [
+        if (
+            in_array($request->getMethod(), [
             RequestInterface::METHOD_GET,
             RequestInterface::METHOD_HEAD,
             RequestInterface::METHOD_OPTIONS,
-        ])) {
+            ])
+        ) {
             return $request;
         }
 
@@ -46,7 +48,7 @@ class VerifyCsrfTokenMiddleware extends Middleware
         $match = strlen($sessionToken) > 0
             && hash_equals($sessionToken, $requestToken);
 
-        if(!$match){
+        if (!$match) {
             throw new CsrfTokenMismatchException();
         }
 

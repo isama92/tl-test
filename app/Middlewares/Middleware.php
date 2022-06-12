@@ -41,7 +41,7 @@ abstract class Middleware implements MiddlewareInterface
     {
         $request = $this->handle($request);
 
-        if(isset($this->nextMiddleware)) {
+        if (isset($this->nextMiddleware)) {
             return $this->nextMiddleware->execute($request);
         }
 

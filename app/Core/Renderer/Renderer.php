@@ -37,7 +37,7 @@ class Renderer extends CoreAbstract implements RendererInterface
         $rootDir = $container->getRootDir();
         $configs = $container->config()->get('views');
         $this->viewsDirPath = $rootDir . $configs['dir'];
-        $this->cachePath = !is_null($configs['cache'])? $rootDir . $configs['cache'] : null;
+        $this->cachePath = !is_null($configs['cache']) ? $rootDir . $configs['cache'] : null;
 
         $this->createTwig();
 
@@ -52,7 +52,7 @@ class Renderer extends CoreAbstract implements RendererInterface
     {
         $configs = [];
 
-        if(!is_null($this->cachePath)) {
+        if (!is_null($this->cachePath)) {
             $configs['cache'] = $this->cachePath;
         }
 

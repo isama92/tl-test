@@ -9,6 +9,6 @@ class ConvertEmptyStringsToNullMiddleware extends TransformMiddleware
      */
     protected function transform(string $key, mixed $value): mixed
     {
-        return $value !== ''? $value : null;
+        return $value !== '' ? $value : null;
     }
 }

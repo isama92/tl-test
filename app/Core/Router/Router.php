@@ -54,7 +54,7 @@ class Router extends CoreAbstract implements RouterInterface
      */
     protected function isMethodAvailable(array $routes, string $route, string $method): bool
     {
-        if(!$this->isRouteAvailable($routes, $route)) {
+        if (!$this->isRouteAvailable($routes, $route)) {
             return false;
         }
         return array_key_exists($method, $routes[$route]);
@@ -70,11 +70,11 @@ class Router extends CoreAbstract implements RouterInterface
      */
     protected function isControllerAvailable(string $controllerName, string $controllerMethod): bool
     {
-        if(!class_exists($controllerName)) {
+        if (!class_exists($controllerName)) {
             return false;
         }
 
-        if(!method_exists($controllerName, $controllerMethod)) {
+        if (!method_exists($controllerName, $controllerMethod)) {
             return false;
         }
 
@@ -95,17 +95,17 @@ class Router extends CoreAbstract implements RouterInterface
         $route = $request->getRoute();
         $method = $request->getMethod();
 
-        if(!$this->isRouteAvailable($routes, $route)) {
+        if (!$this->isRouteAvailable($routes, $route)) {
             throw new RouteNotFoundException($route);
         }
 
-        if(!$this->isMethodAvailable($routes, $route, $method)) {
+        if (!$this->isMethodAvailable($routes, $route, $method)) {
             throw new RouteMethodNotFoundException($route, $method);
         }
 
         [$controllerName, $controllerMethod] = $routes[$route][$method];
 
-        if(!$this->isControllerAvailable($controllerName, $controllerMethod)) {
+        if (!$this->isControllerAvailable($controllerName, $controllerMethod)) {
             throw new ControllerNotFoundException($controllerName, $controllerMethod);
         }
 
@@ -139,7 +139,7 @@ class Router extends CoreAbstract implements RouterInterface
     {
         $status = ResponseInterface::HTTP_STATUS_CODE_ERROR;
 
-        if($e instanceof ExceptionAbstract) {
+        if ($e instanceof ExceptionAbstract) {
             $status = $e->getStatusCode();
         }
 
@@ -164,9 +164,9 @@ class Router extends CoreAbstract implements RouterInterface
 
         $firstMiddleware = null;
         $lastMiddleware = null;
-        foreach($middlewares as $m) {
+        foreach ($middlewares as $m) {
             $middleware = new $m($this->container);
-            if(!is_null($lastMiddleware)) {
+            if (!is_null($lastMiddleware)) {
                 $lastMiddleware->setNext($middleware);
             } else {
                 $firstMiddleware = $middleware;
@@ -188,7 +188,7 @@ class Router extends CoreAbstract implements RouterInterface
         try {
             $request = $this->dispatchToMiddlewares($request);
             $response = $this->dispatchToController($request);
-        } catch(Throwable $e) {
+        } catch (Throwable $e) {
             // TODO: log exception message and trace
             $response = $this->dispatchToErrorHandler($request, $e);
         }

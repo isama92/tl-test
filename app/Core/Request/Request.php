@@ -24,9 +24,9 @@ class Request extends CoreAbstract implements RequestInterface
 
     public function __construct()
     {
-        $this->setRoute();;
-        $this->setGet();;
-        $this->setPost();;
+        $this->setRoute();
+        $this->setGet();
+        $this->setPost();
     }
 
     /**

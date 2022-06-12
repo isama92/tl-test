@@ -28,10 +28,9 @@ class ReadAndShowCsvFileUseCase extends CsvHandlerUseCaseAbstract
         $activeFileArray = [];
 
         // if a file name is passed in query string
-        if(!is_null($activeFileName)) {
-
+        if (!is_null($activeFileName)) {
             // if file do not exist
-            if(!in_array($activeFileName, $csvFiles)) {
+            if (!in_array($activeFileName, $csvFiles)) {
                 throw new CsvFileNotFoundException($activeFileName);
             }
 
@@ -40,7 +39,7 @@ class ReadAndShowCsvFileUseCase extends CsvHandlerUseCaseAbstract
             $activeFileArray = $storage->getCsv($activeFilePath, ';');
 
             // if it has at least one line then get headers
-            if(count($activeFileArray) > 0) {
+            if (count($activeFileArray) > 0) {
                 $activeFileHeaders = array_keys($activeFileArray[0]);
             }
         }

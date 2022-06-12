@@ -38,7 +38,7 @@ class Session extends CoreAbstract implements SessionInterface
      */
     public function stop(): void
     {
-        if(!$this->hasStarted()) {
+        if (!$this->hasStarted()) {
             session_destroy();
             $this->setStarted(false);
         }
