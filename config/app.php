@@ -19,5 +19,6 @@ return [
 
         \App\Middlewares\ConvertEmptyStringsToNullMiddleware::class,
         \App\Middlewares\VerifyCsrfTokenMiddleware::class,
+        \App\Middlewares\SecureHeadersMiddleware::class,
     ],
 ];
