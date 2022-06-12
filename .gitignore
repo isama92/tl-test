@@ -20,6 +20,9 @@ coverage/
 # cache
 storage/cache/
 
+# logs
+storage/logs/
+
 # build
 public/assets/js/
 public/assets/css/

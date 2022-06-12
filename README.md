@@ -4,7 +4,8 @@
 - I use the csv ID to see if the row already exists in db and do a upsert.
 - In CSV if the ID is 0 then the row will be inserted as new
 - env production will disable printing of the trace on errors
-
+- I stripped html tags from CSVs since it was a mess to parse them with htmlspecialchars without a string delimiter
+- 
 ## Usage
 To make it run correctly a small setup is needed.
 

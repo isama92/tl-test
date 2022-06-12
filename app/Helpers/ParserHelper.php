@@ -26,6 +26,7 @@ class ParserHelper
 
         // extract data from the csv string single line
         foreach ($lines as $l) {
+            $l = strip_tags($l);
             $arr[] = str_getcsv($l, $separator, $enclosure, $escape);
         }
 
@@ -42,7 +43,9 @@ class ParserHelper
         foreach ($arr as $row) {
             $rowData = [];
             foreach ($row as $i => $col) {
-                $rowData[$headers[$i]] = $col;
+                if(array_key_exists($i, $headers)) {
+                    $rowData[$headers[$i]] = $col;
+                }
             }
             $data[] = $rowData;
         }
