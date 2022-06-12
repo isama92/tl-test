@@ -11,6 +11,7 @@ return [
     'environment' => $env,
     'middlewares' => [
         \App\Middlewares\StartSessionMiddleware::class,
+        \App\Middlewares\ValidatePostSizeMiddleware::class,
         \App\Middlewares\TrimStringsMiddleware::class,
         \App\Middlewares\StripStringsMiddleware::class,
         \App\Middlewares\ConvertEmptyStringsToNullMiddleware::class,

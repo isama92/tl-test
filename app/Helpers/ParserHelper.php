@@ -29,7 +29,7 @@ class ParserHelper
             $arr[] = str_getcsv($l, $separator, $enclosure, $escape);
         }
 
-        // if it hasm't at least 2 lines (1 line for headers and 1 for data)
+        // if it hasn't at least 2 lines (1 line for headers and 1 for data)
         if (count($arr) < 2) {
             return [];
         }

@@ -46,4 +46,9 @@ interface AffectedRowsInterface
      * @return void
      */
     public function sum(AffectedRowsInterface $affectedRows): void;
+
+    /**
+     * @return int
+     */
+    public function getTotal(): int;
 }

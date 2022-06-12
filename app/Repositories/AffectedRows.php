@@ -86,4 +86,14 @@ class AffectedRows implements AffectedRowsInterface
         $this->setUpdated($this->getUpdated() + $affectedRows->getUpdated());
         $this->setDeleted($this->getDeleted() + $affectedRows->getDeleted());
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getTotal(): int
+    {
+        return $this->getCreated() +
+            $this->getUpdated() +
+            $this->getDeleted();
+    }
 }

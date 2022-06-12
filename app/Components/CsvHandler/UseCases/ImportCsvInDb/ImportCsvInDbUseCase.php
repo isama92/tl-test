@@ -29,6 +29,7 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
         $repo = $collFactory->createCsvHandlerRepository();
         $storage = $this->container->storage();
         $parserHelper = $collFactory->createParserHelper();
+        $affectedRows = $collFactory->createAffectedRows();
 
         $csvFiles = $storage->list(self::STORAGE_CSV_DIR);
 
@@ -37,9 +38,21 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
             $csvArray = $parserHelper->csvToArray($csvString, self::CSV_SEPARATOR);
         }
 
+        if(!count($csvArray)) {
+            // TODO: add errors
+            return $collFactory->createHtmlPresenter(
+                $this->container->renderer()->render('csv/import.twig', [
+                    'queryStringFileName' => self::QUERY_STRING_FILE_NAME,
+                    'fieldTextAreaName' => self::CONTENT_TEXTAREA_NAME,
+                    'filesList' => $csvFiles,
+                    'affectedRows' => $affectedRows,
+                    'activeFileContent' => $csvString,
+                ])
+            );
+        }
+
         // TODO: validate csv headers and content: it must be a string and have 3 cols with the given headers
 
-        $affectedRows = $collFactory->createAffectedRows();
         foreach ($csvArray as $csvArrayRow) {
             $csvRow = $collFactory->createCsvRow(
                 $csvArrayRow[self::CSV_HEADER_AUTHOR],
@@ -50,15 +63,15 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
             $affectedRows->sum($queryAffectedRows);
         }
 
-        $html = $this->container->renderer()->render('csv/import.twig', [
-            'queryStringFileName' => self::QUERY_STRING_FILE_NAME,
-            'fieldTextAreaName' => self::CONTENT_TEXTAREA_NAME,
-            'filesList' => $csvFiles,
-            'affectedRows' => $affectedRows,
-            'activeFileContent' => $csvString,
-        ]);
-
-        return $collFactory->createHtmlPresenter($html);
+        return $collFactory->createHtmlPresenter(
+            $this->container->renderer()->render('csv/import.twig', [
+                'queryStringFileName' => self::QUERY_STRING_FILE_NAME,
+                'fieldTextAreaName' => self::CONTENT_TEXTAREA_NAME,
+                'filesList' => $csvFiles,
+                'affectedRows' => $affectedRows,
+                'activeFileContent' => $csvString,
+            ])
+        );
     }
 
     /**
