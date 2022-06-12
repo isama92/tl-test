@@ -40,6 +40,7 @@ interface StorageInterface
      * @param string $separator
      * @param string $enclosure
      * @param string $escape
+     * @param bool   $hasHeaders
      *
      * @return array
      */

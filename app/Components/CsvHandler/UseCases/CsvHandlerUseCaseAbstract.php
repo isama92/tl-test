@@ -13,9 +13,9 @@ abstract class CsvHandlerUseCaseAbstract implements UseCaseContract
     const STORAGE_CSV_DIR = 'csv/';
 
     /**
-     * @const Name of the query string parameter where the file name is passed
+     * @const Csv separator
      */
-    const QUERY_STRING_FILE_NAME = 'file';
+    const CSV_SEPARATOR = ';';
 
     /**
      * @var \App\Core\Container\ContainerInterface

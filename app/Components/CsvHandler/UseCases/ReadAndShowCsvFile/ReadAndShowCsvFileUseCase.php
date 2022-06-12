@@ -10,6 +10,11 @@ use App\Presenters\PresenterInterface;
 class ReadAndShowCsvFileUseCase extends CsvHandlerUseCaseAbstract
 {
     /**
+     * @const Name of the query string parameter where the file name is passed
+     */
+    const QUERY_STRING_FILE_NAME = 'file';
+
+    /**
      * @inheritDoc
      * @throws \App\Exceptions\Csv\CsvFileNotFoundException
      * @throws \App\Exceptions\Response\InvalidStatusCodeException
@@ -17,6 +22,7 @@ class ReadAndShowCsvFileUseCase extends CsvHandlerUseCaseAbstract
     public function execute(array $requestData = []): PresenterInterface
     {
         $storage = $this->container->storage();
+        $parserHelper = $this->createCollaboratorsFactory()->createParserHelper();
         $csvFiles = $storage->list(self::STORAGE_CSV_DIR);
 
         $activeFileName = $this->container->request()->get(self::QUERY_STRING_FILE_NAME);
@@ -37,7 +43,7 @@ class ReadAndShowCsvFileUseCase extends CsvHandlerUseCaseAbstract
 
             $activeFilePath = self::STORAGE_CSV_DIR . $activeFileName;
             $activeFileContent = $storage->get($activeFilePath);
-            $activeFileArray = $storage->getCsv($activeFilePath, ';');
+            $activeFileArray = $parserHelper->csvToArray($activeFileContent, self::CSV_SEPARATOR);
 
             // if it has at least one line then get headers
             if (count($activeFileArray) > 0) {
@@ -59,7 +65,7 @@ class ReadAndShowCsvFileUseCase extends CsvHandlerUseCaseAbstract
     }
 
     /**
-     * @return \App\Components\CsvHandler\UseCases\CsvHandlerUseCaseCollaboratorsFactory
+     * @inheritDoc
      */
     protected function createCollaboratorsFactory(): CsvHandlerUseCaseCollaboratorsFactory
     {

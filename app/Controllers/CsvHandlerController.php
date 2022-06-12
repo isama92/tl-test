@@ -21,8 +21,7 @@ class CsvHandlerController extends Controller
      */
     public function import(): PresenterInterface
     {
-        $content = $this->container->request()->post('content');
-        dd($content);
-        // TODO: parse CSV - D'OH
+        return (new CsvHandlerComponent($this->container))
+            ->importCsvInDb();
     }
 }

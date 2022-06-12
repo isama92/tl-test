@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Components\CsvHandler\UseCases\ReadAndShowCsvFile;
+namespace App\Components\CsvHandler\UseCases\ImportCsvInDb;
 
 use App\Components\CsvHandler\UseCases\CsvHandlerUseCaseCollaboratorsFactory;
 use App\FactoryMethods\Helpers\ParserHelperFactoryMethod;

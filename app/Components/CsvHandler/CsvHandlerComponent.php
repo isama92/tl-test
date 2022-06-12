@@ -19,6 +19,15 @@ class CsvHandlerComponent extends Component implements CsvHandlerComponentInterf
     }
 
     /**
+     * @inheritDoc
+     */
+    public function importCsvInDb(): PresenterInterface
+    {
+        return $this->useCaseFactory->makeImportCsvInDb()
+            ->execute();
+    }
+
+    /**
      * @return \App\Contracts\UseCaseFactoryContract
      */
     protected function createUseCaseFactory(): UseCaseFactoryContract
