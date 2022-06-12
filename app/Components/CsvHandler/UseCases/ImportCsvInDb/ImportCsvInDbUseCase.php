@@ -18,6 +18,7 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
 
     /**
      * @inheritDoc
+     * @throws \App\Exceptions\Response\InvalidStatusCodeException
      */
     public function execute(array $requestData = []): PresenterInterface
     {
@@ -35,7 +36,6 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
         if(is_string($csvString)) {
             $csvArray = $parserHelper->csvToArray($csvString, self::CSV_SEPARATOR);
         }
-
 
         // TODO: validate csv headers and content: it must be a string and have 3 cols with the given headers
 
@@ -55,6 +55,7 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
             'fieldTextAreaName' => self::CONTENT_TEXTAREA_NAME,
             'filesList' => $csvFiles,
             'affectedRows' => $affectedRows,
+            'activeFileContent' => $csvString,
         ]);
 
         return $collFactory->createHtmlPresenter($html);

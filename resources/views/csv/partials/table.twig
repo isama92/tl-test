@@ -1,20 +1,26 @@
 <div class="mb-5">
-    <table class="table table-striped table-hover">
-        <thead>
-        <tr>
-            {% for header in activeFileHeaders %}
-                <th>{{ header }}</th>
-            {% endfor %}
-        </tr>
-        </thead>
-        <tbody>
-        {% for row in activeFileArray %}
+    <h2 class="h5 pb-2">Table</h2>
+
+    {% if activeFileArray|length > 0 %}
+        <table class="table table-striped table-hover">
+            <thead>
             <tr>
                 {% for header in activeFileHeaders %}
-                    <td>{{ row[header] }}</td>
+                    <th>{{ header }}</th>
                 {% endfor %}
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for row in activeFileArray %}
+                <tr>
+                    {% for header in activeFileHeaders %}
+                        <td>{{ row[header] }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        There are no records in the selected CSV file
+    {% endif %}
 </div>

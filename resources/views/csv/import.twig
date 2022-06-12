@@ -2,13 +2,16 @@
 
 {% block content %}
 
-    {% include('csv/partials/list.twig') %}
-
     <div class="alert alert-primary" role="alert">
         <span>The CSV string has been imported into the database (</span>
         <span>{{ affectedRows.getCreated() }} created,</span>
         <span>{{ affectedRows.getUpdated() }} updated</span>
         <span>)</span>
     </div>
+
+    {% include('csv/partials/list.twig') %}
+
+    {% include('csv/partials/form.twig') %}
+
 
 {% endblock %}
