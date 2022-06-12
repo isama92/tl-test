@@ -2,17 +2,11 @@
 
 namespace App\Presenters;
 
-use App\Core\Response\ResponseInterface;
 use App\FactoryMethods\Response\ResponseFactoryMethod;
 use App\Traits\HttpStatusCodeTrait;
 
-abstract class Presenter
+abstract class Presenter implements PresenterInterface
 {
     use HttpStatusCodeTrait;
     use ResponseFactoryMethod;
-
-    /**
-     * @return \App\Core\Response\ResponseInterface
-     */
-    abstract public function present(): ResponseInterface;
 }

@@ -3,17 +3,17 @@
 namespace App\Controllers;
 
 use App\Components\CsvHandler\CsvHandlerComponent;
-use App\Presenters\Presenter;
+use App\Presenters\PresenterInterface;
 
 class CsvHandlerController extends Controller
 {
-    public function index(): Presenter
+    public function index(): PresenterInterface
     {
         return (new CsvHandlerComponent($this->container))
             ->readAndShowCsvFile();
     }
 
-    public function import()
+    public function import(): PresenterInterface
     {
         $content = $this->container->request()->post('content');
         dd($content);

@@ -2,12 +2,12 @@
 
 namespace App\Components\CsvHandler;
 
-use App\Presenters\Presenter;
+use App\Presenters\PresenterInterface;
 
 interface CsvHandlerComponentInterface
 {
     /**
      * @return \App\Presenters\Presenter
      */
-    public function readAndShowCsvFile(): Presenter;
+    public function readAndShowCsvFile(): PresenterInterface;
 }

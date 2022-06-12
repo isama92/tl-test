@@ -2,7 +2,7 @@
 
 namespace App\Contracts;
 
-use App\Presenters\Presenter;
+use App\Presenters\PresenterInterface;
 
 interface UseCaseContract
 {
@@ -11,5 +11,5 @@ interface UseCaseContract
      *
      * @return mixed
      */
-    public function execute(array $requestData = []): Presenter;
+    public function execute(array $requestData = []): PresenterInterface;
 }

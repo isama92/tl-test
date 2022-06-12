@@ -5,7 +5,7 @@ namespace App\Components\CsvHandler\UseCases\ReadAndShowCsvFile;
 use App\Components\CsvHandler\UseCases\CsvHandlerUseCaseAbstract;
 use App\Components\CsvHandler\UseCases\CsvHandlerUseCaseCollaboratorsFactory;
 use App\Exceptions\Csv\CsvFileNotFoundException;
-use App\Presenters\Presenter;
+use App\Presenters\PresenterInterface;
 
 class ReadAndShowCsvFileUseCase extends CsvHandlerUseCaseAbstract
 {
@@ -13,7 +13,7 @@ class ReadAndShowCsvFileUseCase extends CsvHandlerUseCaseAbstract
      * @inheritDoc
      * @throws \App\Exceptions\Csv\CsvFileNotFoundException
      */
-    public function execute(array $requestData = []): Presenter
+    public function execute(array $requestData = []): PresenterInterface
     {
         $storage = $this->container->storage();
         $csvFiles = $storage->list(self::STORAGE_CSV_DIR);
