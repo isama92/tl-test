@@ -13,11 +13,7 @@ class CSVHandler {
     private $fileName;
 
     private const DATABASECONFIG = [
-        'server' => '188.226.152.164',
-        'port' => 33306,
-        'user' => 'teamliquid',
-        'password' => 'teamliquidtest',
-        'name' => 'teamliquid',
+        // censored
     ];
 
     /**
