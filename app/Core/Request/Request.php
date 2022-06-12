@@ -55,7 +55,7 @@ class Request extends CoreAbstract implements RequestInterface
     {
         $this->post = [];
         foreach ($_POST as $k => $v) {
-            $this->get[$k] = $v;
+            $this->post[$k] = $v;
         }
     }
 
