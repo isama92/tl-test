@@ -96,6 +96,8 @@ class Storage extends CoreAbstract implements StorageInterface
             $data[] = $rowData;
         }
 
+        fclose($fh);
+
         return $data;
     }
 }
