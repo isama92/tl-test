@@ -10,12 +10,12 @@ use App\Exceptions\ExceptionAbstract;
 use App\Exceptions\Router\ControllerNotFoundException;
 use App\Exceptions\Router\RouteMethodNotFoundException;
 use App\Exceptions\Router\RouteNotFoundException;
-use App\FactoryMethods\Response\ResponseFactoryMethod;
+use App\FactoryMethods\Presenter\PresenterFactoryMethod;
 use Throwable;
 
 class Router extends CoreAbstract implements RouterInterface
 {
-    use ResponseFactoryMethod;
+    use PresenterFactoryMethod;
 
     /**
      * @var \App\Core\Container\ContainerInterface
@@ -133,12 +133,12 @@ class Router extends CoreAbstract implements RouterInterface
      * @param \Throwable                         $e
      *
      * @return \App\Core\Response\ResponseInterface
+     * @throws \App\Exceptions\Response\InvalidStatusCodeException
      */
     protected function dispatchToErrorHandler(RequestInterface $request, Throwable $e): ResponseInterface
     {
-        $response = $this->container->response();
+        $status = ResponseInterface::HTTP_STATUS_CODE_ERROR;
 
-        $status = $response::HTTP_STATUS_CODE_ERROR;
         if($e instanceof ExceptionAbstract) {
             $status = $e->getStatusCode();
         }
@@ -148,9 +148,9 @@ class Router extends CoreAbstract implements RouterInterface
             'message' => $e->getMessage(),
         ]);
 
-        $response->setStatusCode($status);
-        $response->setResponse($errorPage);
-        return $response;
+        $presenter = $this->createHtmlPresenter($errorPage, $status);
+
+        return $presenter->present();
     }
 
     /**
