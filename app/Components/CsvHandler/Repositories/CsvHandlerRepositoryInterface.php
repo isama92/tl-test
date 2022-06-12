@@ -15,6 +15,21 @@ interface CsvHandlerRepositoryInterface
     public function findById(int $id): ?CsvRowInterface;
 
     /**
+     * @param \App\Components\CsvHandler\Domains\CsvRowInterface $csvRow
+     *
+     * @return \App\Repositories\AffectedRowsInterface
+     */
+    public function create(CsvRowInterface $csvRow): AffectedRowsInterface;
+
+    /**
+     * @param int                                                $id
+     * @param \App\Components\CsvHandler\Domains\CsvRowInterface $csvRow
+     *
+     * @return \App\Repositories\AffectedRowsInterface
+     */
+    public function updateById(int $id, CsvRowInterface $csvRow): AffectedRowsInterface;
+
+    /**
      * @param int                                                $id
      * @param \App\Components\CsvHandler\Domains\CsvRowInterface $newCsvRow
      *

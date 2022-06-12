@@ -14,6 +14,21 @@ class CsvHandlerRepository extends Repository implements CsvHandlerRepositoryInt
     protected string $primaryKey = CsvRowInterface::ID;
 
     /**
+     * @var string
+     */
+    protected $fieldId = CsvRowInterface::ID;
+
+    /**
+     * @var string
+     */
+    protected $fieldAuthor = CsvRowInterface::AUTHOR;
+
+    /**
+     * @var string
+     */
+    protected $fieldTitle = CsvRowInterface::TITLE;
+
+    /**
      * @inheritDoc
      */
     protected function tableName(): string
@@ -35,10 +50,47 @@ class CsvHandlerRepository extends Repository implements CsvHandlerRepositoryInt
         }
 
         return $this->createCsvRow(
-            $row->{CsvRowInterface::AUTHOR},
-            $row->{CsvRowInterface::TITLE},
-            $row->{CsvRowInterface::ID}
+            $row->{$this->fieldAuthor},
+            $row->{$this->fieldTitle},
+            $row->{$this->fieldId}
         );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function create(CsvRowInterface $csvRow): AffectedRowsInterface
+    {
+        $values = $csvRow->getAllValues();
+
+        $affectedRows = $this->db->insert(
+            "
+                INSERT INTO {$this->table} ({$this->fieldId}, {$this->fieldAuthor}, {$this->fieldTitle})
+                VALUES (:{$this->fieldId}, :{$this->fieldAuthor}, :{$this->fieldTitle})
+            ",
+            $values
+        );
+        return $this->createAffectedRowsWithCreated($affectedRows);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function updateById(int $id, CsvRowInterface $csvRow): AffectedRowsInterface
+    {
+        $values = $csvRow->getAllValues();
+
+        $affectedRows = $this->db->update(
+            "
+                UPDATE {$this->table}
+                SET
+                    {$this->fieldAuthor}=:{$this->fieldAuthor},
+                    {$this->fieldTitle}=:{$this->fieldTitle}
+                WHERE {$this->fieldId}=:{$this->fieldId}
+            ",
+            $values
+        );
+        return $this->createAffectedRowsWithUpdated($affectedRows);
     }
 
     /**
@@ -46,39 +98,13 @@ class CsvHandlerRepository extends Repository implements CsvHandlerRepositoryInt
      */
     public function upsertCsvRow(int $id, CsvRowInterface $newCsvRow): AffectedRowsInterface
     {
-        // TODO: refactor - create insert and update method
-
         $csvRow = $this->findById($id);
 
-        $values = $newCsvRow->getAllValues();
-        $fieldId = $newCsvRow::ID;
-        $fieldAuthor = $newCsvRow::AUTHOR;
-        $fieldTitle = $newCsvRow::TITLE;
-
         if (is_null($csvRow)) {
-            // create
-            $affectedRows = $this->db->insert(
-                "
-                INSERT INTO {$this->table} ({$fieldId}, {$fieldAuthor}, {$fieldTitle})
-                VALUES (:{$fieldId}, :{$fieldAuthor}, :{$fieldTitle})
-            ",
-                $values
-            );
-            return $this->createAffectedRowsWithCreated($affectedRows);
+            return $this->create($newCsvRow);
         }
 
-        // updated
-        $affectedRows = $this->db->update(
-            "
-                UPDATE {$this->table}
-                SET
-                    {$fieldAuthor}=:{$fieldAuthor},
-                    {$fieldTitle}=:{$fieldTitle}
-                WHERE {$fieldId}=:{$fieldId}
-            ",
-            $values
-        );
-        return $this->createAffectedRowsWithUpdated($affectedRows);
+        return $this->updateById($id, $newCsvRow);
     }
 
     /**
@@ -100,5 +126,4 @@ class CsvHandlerRepository extends Repository implements CsvHandlerRepositoryInt
 
         return $data;
     }
-
 }
