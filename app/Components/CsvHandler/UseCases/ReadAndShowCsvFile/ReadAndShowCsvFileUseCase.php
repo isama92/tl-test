@@ -49,10 +49,10 @@ class ReadAndShowCsvFileUseCase extends CsvHandlerUseCaseAbstract
             'queryStringFileName' => self::QUERY_STRING_FILE_NAME,
             'fieldTextAreaName' => self::CONTENT_TEXTAREA_NAME,
             'filesList' => $csvFiles,
-            'activeFileName' => $activeFileName,
-            'activeFileContent' => $activeFileContent,
-            'activeFileArray' => $activeFileArray,
-            'activeFileHeaders' => $activeFileHeaders,
+            'listActiveCsv' => $activeFileName,
+            'textareaCsvContent' => $activeFileContent,
+            'tableArrayRows' => $activeFileArray,
+            'tableArrayHeaders' => $activeFileHeaders,
         ]);
 
         return $this->createCollaboratorsFactory()

@@ -46,7 +46,7 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
                     'fieldTextAreaName' => self::CONTENT_TEXTAREA_NAME,
                     'filesList' => $csvFiles,
                     'affectedRows' => $affectedRows,
-                    'activeFileContent' => $csvString,
+                    'textareaCsvContent' => $csvString,
                 ])
             );
         }
@@ -69,7 +69,7 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
                 'fieldTextAreaName' => self::CONTENT_TEXTAREA_NAME,
                 'filesList' => $csvFiles,
                 'affectedRows' => $affectedRows,
-                'activeFileContent' => $csvString,
+                'textareaCsvContent' => $csvString,
             ])
         );
     }
