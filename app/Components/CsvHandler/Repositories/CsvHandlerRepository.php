@@ -37,7 +37,7 @@ class CsvHandlerRepository extends Repository implements CsvHandlerRepositoryInt
         return $this->createCsvRow(
             $row->{CsvRowInterface::AUTHOR},
             $row->{CsvRowInterface::TITLE},
-            $row->{CsvRowInterface::ID},
+            $row->{CsvRowInterface::ID}
         );
     }
 
@@ -46,6 +46,8 @@ class CsvHandlerRepository extends Repository implements CsvHandlerRepositoryInt
      */
     public function upsertCsvRow(int $id, CsvRowInterface $newCsvRow): AffectedRowsInterface
     {
+        // TODO: refactor - create insert and update method
+
         $csvRow = $this->findById($id);
 
         $values = $newCsvRow->getAllValues();
@@ -78,4 +80,25 @@ class CsvHandlerRepository extends Repository implements CsvHandlerRepositoryInt
         );
         return $this->createAffectedRowsWithUpdated($affectedRows);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function all(): array
+    {
+        $data = [];
+
+        $dbRows = $this->db->select("SELECT * FROM {$this->table}");
+
+        foreach($dbRows as $row) {
+            $data[] = $this->createCsvRow(
+                $row->{CsvRowInterface::AUTHOR},
+                $row->{CsvRowInterface::TITLE},
+                $row->{CsvRowInterface::ID}
+            );
+        }
+
+        return $data;
+    }
+
 }

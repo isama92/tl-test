@@ -41,6 +41,7 @@ class Renderer extends CoreAbstract implements RendererInterface
 
         $this->createTwig();
 
+        $this->twig->addGlobal('route', $container->router()->getRoute());
         $this->twig->addGlobal('csrfField', RequestInterface::REQUEST_CSRF_TOKEN_KEY);
         $this->twig->addGlobal('csrfValue', $container->session()->token());
     }

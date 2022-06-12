@@ -85,4 +85,16 @@ class CsvRow implements CsvRowInterface
 
         return $attributes;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'author' => $this->author,
+            'title' => $this->title,
+        ];
+    }
 }

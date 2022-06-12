@@ -31,6 +31,14 @@ class Router extends CoreAbstract implements RouterInterface
     }
 
     /**
+     * @inheritDoc
+     */
+    public function getRoute(): string
+    {
+        return $this->container->request()->getRoute();
+    }
+
+    /**
      * Check if given route exists
      *
      * @param array  $routes

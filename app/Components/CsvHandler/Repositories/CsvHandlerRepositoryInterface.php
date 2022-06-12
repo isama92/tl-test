@@ -21,4 +21,9 @@ interface CsvHandlerRepositoryInterface
      * @return \App\Repositories\AffectedRowsInterface
      */
     public function upsertCsvRow(int $id, CsvRowInterface $newCsvRow): AffectedRowsInterface;
+
+    /**
+     * @return CsvRowInterface[]
+     */
+    public function all(): array;
 }

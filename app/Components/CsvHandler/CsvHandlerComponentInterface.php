@@ -15,4 +15,9 @@ interface CsvHandlerComponentInterface
      * @return \App\Presenters\Presenter
      */
     public function importCsvInDb(): PresenterInterface;
+
+    /**
+     * @return \App\Presenters\Presenter
+     */
+    public function showFromDb(): PresenterInterface;
 }

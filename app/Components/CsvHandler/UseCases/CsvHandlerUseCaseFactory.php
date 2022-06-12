@@ -4,6 +4,7 @@ namespace App\Components\CsvHandler\UseCases;
 
 use App\Components\CsvHandler\UseCases\ImportCsvInDb\ImportCsvInDbUseCase;
 use App\Components\CsvHandler\UseCases\ReadAndShowCsvFile\ReadAndShowCsvFileUseCase;
+use App\Components\CsvHandler\UseCases\ShowFromDb\ShowFromDbUseCase;
 use App\Contracts\UseCaseContract;
 use App\Contracts\UseCaseFactoryContract;
 use App\Core\Container\ContainerInterface;
@@ -37,5 +38,13 @@ class CsvHandlerUseCaseFactory implements UseCaseFactoryContract
     public function makeImportCsvInDb(): ImportCsvInDbUseCase
     {
         return new ImportCsvInDbUseCase($this->container);
+    }
+
+    /**
+     * @return \App\Components\CsvHandler\UseCases\ShowFromDb\ShowFromDbUseCase
+     */
+    public function makeShowFromDb(): ShowFromDbUseCase
+    {
+        return new ShowFromDbUseCase($this->container);
     }
 }

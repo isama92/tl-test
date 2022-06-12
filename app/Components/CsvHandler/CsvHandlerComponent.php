@@ -28,6 +28,15 @@ class CsvHandlerComponent extends Component implements CsvHandlerComponentInterf
     }
 
     /**
+     * @inheritDoc
+     */
+    public function showFromDb(): PresenterInterface
+    {
+        return $this->useCaseFactory->makeShowFromDb()
+            ->execute();
+    }
+
+    /**
      * @return \App\Components\CsvHandler\UseCases\CsvHandlerUseCaseFactory
      */
     protected function createUseCaseFactory(): CsvHandlerUseCaseFactory

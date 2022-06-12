@@ -24,4 +24,13 @@ class CsvHandlerController extends Controller
         return (new CsvHandlerComponent($this->container))
             ->importCsvInDb();
     }
+
+    /**
+     * @return \App\Presenters\PresenterInterface
+     */
+    public function db(): PresenterInterface
+    {
+        return (new CsvHandlerComponent($this->container))
+            ->showFromDb();
+    }
 }

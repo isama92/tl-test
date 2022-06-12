@@ -2,7 +2,9 @@
 
 namespace App\Components\CsvHandler\Domains;
 
-interface CsvRowInterface
+use App\Contracts\ToArrayContract;
+
+interface CsvRowInterface extends ToArrayContract
 {
     /**
      * @const DB ID key

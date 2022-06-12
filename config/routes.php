@@ -10,4 +10,7 @@ return [
     '/import' => [
         $post => [\App\Controllers\CsvHandlerController::class, 'import'],
     ],
+    '/db' => [
+        $get => [\App\Controllers\CsvHandlerController::class, 'db'],
+    ],
 ];

@@ -15,8 +15,9 @@ class ReadAndShowCsvFileUseCase extends CsvHandlerUseCaseAbstract
      */
     public function execute(array $requestData = []): PresenterInterface
     {
+        $collabFactory = $this->createCollaboratorsFactory();
         $storage = $this->container->storage();
-        $parserHelper = $this->createCollaboratorsFactory()->createParserHelper();
+        $parserHelper = $collabFactory->createParserHelper();
         $csvFiles = $storage->list(self::STORAGE_CSV_DIR);
 
         $activeFileName = $this->container->request()->get(self::QUERY_STRING_FILE_NAME);
@@ -45,18 +46,17 @@ class ReadAndShowCsvFileUseCase extends CsvHandlerUseCaseAbstract
             }
         }
 
-        $html = $this->container->renderer()->render('csv/index.twig', [
-            'queryStringFileName' => self::QUERY_STRING_FILE_NAME,
-            'fieldTextAreaName' => self::CONTENT_TEXTAREA_NAME,
-            'filesList' => $csvFiles,
-            'listActiveCsv' => $activeFileName,
-            'textareaCsvContent' => $activeFileContent,
-            'tableArrayRows' => $activeFileArray,
-            'tableArrayHeaders' => $activeFileHeaders,
-        ]);
-
-        return $this->createCollaboratorsFactory()
-            ->createHtmlPresenter($html);
+        return $collabFactory->createHtmlPresenter(
+                $this->container->renderer()->render('csv/index.twig', [
+                    'queryStringFileName' => self::QUERY_STRING_FILE_NAME,
+                    'fieldTextAreaName' => self::CONTENT_TEXTAREA_NAME,
+                    'filesList' => $csvFiles,
+                    'listActiveCsv' => $activeFileName,
+                    'textareaCsvContent' => $activeFileContent,
+                    'tableArrayRows' => $activeFileArray,
+                    'tableArrayHeaders' => $activeFileHeaders,
+                ])
+            );
     }
 
     /**

@@ -24,12 +24,12 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
     {
         $csvString = $this->container->request()->post(self::CONTENT_TEXTAREA_NAME);
 
-        $collFactory = $this->createCollaboratorsFactory();
+        $collabFactory = $this->createCollaboratorsFactory();
 
-        $repo = $collFactory->createCsvHandlerRepository();
+        $repo = $collabFactory->createCsvHandlerRepository();
         $storage = $this->container->storage();
-        $parserHelper = $collFactory->createParserHelper();
-        $affectedRows = $collFactory->createAffectedRows();
+        $parserHelper = $collabFactory->createParserHelper();
+        $affectedRows = $collabFactory->createAffectedRows();
 
         $csvFiles = $storage->list(self::STORAGE_CSV_DIR);
 
@@ -40,7 +40,7 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
 
         if(!count($csvArray)) {
             // TODO: add errors
-            return $collFactory->createHtmlPresenter(
+            return $collabFactory->createHtmlPresenter(
                 $this->container->renderer()->render('csv/import.twig', [
                     'queryStringFileName' => self::QUERY_STRING_FILE_NAME,
                     'fieldTextAreaName' => self::CONTENT_TEXTAREA_NAME,
@@ -54,7 +54,7 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
         // TODO: validate csv headers and content: it must be a string and have 3 cols with the given headers
 
         foreach ($csvArray as $csvArrayRow) {
-            $csvRow = $collFactory->createCsvRow(
+            $csvRow = $collabFactory->createCsvRow(
                 $csvArrayRow[self::CSV_HEADER_AUTHOR],
                 $csvArrayRow[self::CSV_HEADER_TITLE],
                 $csvArrayRow[self::CSV_HEADER_ID],
@@ -63,7 +63,7 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
             $affectedRows->sum($queryAffectedRows);
         }
 
-        return $collFactory->createHtmlPresenter(
+        return $collabFactory->createHtmlPresenter(
             $this->container->renderer()->render('csv/import.twig', [
                 'queryStringFileName' => self::QUERY_STRING_FILE_NAME,
                 'fieldTextAreaName' => self::CONTENT_TEXTAREA_NAME,
