@@ -19,7 +19,9 @@
         "overtrue/phplint": "^5.2",
         "squizlabs/php_codesniffer": "^3.6",
         "phpstan/phpstan": "^1.7",
-        "symfony/var-dumper": "^6.1"
+        "symfony/var-dumper": "^6.1",
+        "phpunit/phpunit": "^9.5",
+        "mockery/mockery": "^1.5"
     },
     "config": {
         "optimize-autoloader": true,
@@ -32,6 +34,11 @@
             "App\\": "app/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "prefer-stable": true,
     "scripts": {
         "checkcode": [
@@ -42,6 +49,7 @@
         "phpcbf": "phpcbf --standard=PSR12 app/ config/ public/",
         "phplint": "phplint",
         "phpstan:analyze": "phpstan analyse --configuration phpstan.neon",
-        "phpstan:baseline": "phpstan analyse --configuration phpstan.neon --generate-baseline"
+        "phpstan:baseline": "phpstan analyse --configuration phpstan.neon --generate-baseline",
+        "test:unit": "./vendor/bin/phpunit tests/Unit"
     }
 }
