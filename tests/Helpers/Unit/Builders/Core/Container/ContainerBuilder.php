@@ -26,7 +26,7 @@ class ContainerBuilder
      * @param \App\Core\Renderer\RendererInterface $rendererMock
      * @param \App\Core\Router\RouterInterface     $routerMock
      * @param \App\Core\Session\SessionInterface   $sessionMock
-     * @param \App\Core\Storage\StorageInterface   $storagMock
+     * @param \App\Core\Storage\StorageInterface   $storageMock
      *
      * @return \Tests\Helpers\Unit\Builders\Core\Container\Classes\ContainerWithFakeCollaborator
      */
@@ -41,7 +41,7 @@ class ContainerBuilder
         RendererInterface $rendererMock,
         RouterInterface $routerMock,
         SessionInterface $sessionMock,
-        StorageInterface $storagMock
+        StorageInterface $storageMock
     ) {
         return new ContainerWithFakeCollaborator(
             $rootDir,
@@ -54,7 +54,7 @@ class ContainerBuilder
             $rendererMock,
             $routerMock,
             $sessionMock,
-            $storagMock
+            $storageMock
         );
     }
 }

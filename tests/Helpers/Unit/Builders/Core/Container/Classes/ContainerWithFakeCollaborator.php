@@ -157,5 +157,4 @@ class ContainerWithFakeCollaborator extends Container
     {
         return $this->fakeStorage;
     }
-
 }

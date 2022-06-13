@@ -146,11 +146,6 @@ parameters:
 			path: app/Core/Db/Db.php
 
 		-
-			message: "#^Method App\\\\Core\\\\Db\\\\Db\\:\\:createPDO\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: app/Core/Db/Db.php
-
-		-
 			message: "#^Method App\\\\Core\\\\Db\\\\Db\\:\\:delete\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: app/Core/Db/Db.php
@@ -232,6 +227,11 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'dir' on mixed\\.$#"
+			count: 1
+			path: app/Core/Renderer/Renderer.php
+
+		-
+			message: "#^Method App\\\\Core\\\\Renderer\\\\Renderer\\:\\:createTwigEnvironment\\(\\) has parameter \\$configs with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: app/Core/Renderer/Renderer.php
 

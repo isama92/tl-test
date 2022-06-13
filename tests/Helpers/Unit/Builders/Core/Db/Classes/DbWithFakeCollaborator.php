@@ -35,14 +35,9 @@ class DbWithFakeCollaborator extends Db
     }
 
     /**
-     * @param string $dsn
-     * @param string $user
-     * @param string $password
-     * @param array  $options
-     *
      * @return \PDO
      */
-    protected function createPDO(string $dsn, string $user, string $password, array $options = []): PDO
+    protected function createPDO(): PDO
     {
         return $this->fakePdo;
     }
