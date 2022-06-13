@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Helpers\Unit\Builders\Db\Router;
+namespace Tests\Helpers\Unit\Builders\Core\Db;
 
 use App\Core\Db\DbInterface;
 use PDO;
