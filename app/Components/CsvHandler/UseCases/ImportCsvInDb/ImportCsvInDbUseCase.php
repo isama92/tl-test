@@ -98,7 +98,7 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
                 'fieldTextAreaName' => CsvHandlerComponentInterface::CONTENT_TEXTAREA_NAME,
                 'filesList' => $csvFiles,
                 'affectedRows' => $affectedRows,
-                'textareaCsvContent' => $csvString,
+                'textareaCsvContent' => '',
             ])
         );
     }
