@@ -2,6 +2,7 @@
 
 namespace App\Components\CsvHandler\UseCases\ImportCsvInDb;
 
+use App\Components\CsvHandler\CsvHandlerComponentInterface;
 use App\Components\CsvHandler\UseCases\CsvHandlerUseCaseAbstract;
 use App\Presenters\PresenterInterface;
 
@@ -22,7 +23,7 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
      */
     public function execute(array $requestData = []): PresenterInterface
     {
-        $csvString = $this->container->request()->post(self::CONTENT_TEXTAREA_NAME, '');
+        $csvString = $this->container->request()->post(CsvHandlerComponentInterface::CONTENT_TEXTAREA_NAME, '');
 
         $collabFactory = $this->createCollaboratorsFactory();
 
@@ -31,13 +32,13 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
         $parserHelper = $collabFactory->createParserHelper();
         $affectedRows = $collabFactory->createAffectedRows();
 
-        $csvFiles = $storage->list(self::STORAGE_CSV_DIR);
+        $csvFiles = $storage->list(CsvHandlerComponentInterface::STORAGE_CSV_DIR);
 
         // csv string to array
 
         $csvArray = [];
         if (is_string($csvString)) {
-            $csvArray = $parserHelper->csvToArray($csvString, self::CSV_SEPARATOR);
+            $csvArray = $parserHelper->csvToArray($csvString, CsvHandlerComponentInterface::CSV_SEPARATOR);
         }
 
         // if csv array is empty then is not valid
@@ -93,8 +94,8 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
 
         return $collabFactory->createHtmlPresenter(
             $this->container->renderer()->render('csv/import.twig', [
-                'queryStringFileName' => self::QUERY_STRING_FILE_NAME,
-                'fieldTextAreaName' => self::CONTENT_TEXTAREA_NAME,
+                'queryStringFileName' => CsvHandlerComponentInterface::QUERY_STRING_FILE_NAME,
+                'fieldTextAreaName' => CsvHandlerComponentInterface::CONTENT_TEXTAREA_NAME,
                 'filesList' => $csvFiles,
                 'affectedRows' => $affectedRows,
                 'textareaCsvContent' => $csvString,
@@ -108,12 +109,12 @@ class ImportCsvInDbUseCase extends CsvHandlerUseCaseAbstract
         string $oldValue,
         string $error
     ): PresenterInterface {
-        $activeFileName = $this->container->request()->get(self::QUERY_STRING_FILE_NAME);
+        $activeFileName = $this->container->request()->get(CsvHandlerComponentInterface::QUERY_STRING_FILE_NAME);
 
         return $collabFactory->createHtmlPresenter(
             $this->container->renderer()->render('csv/index.twig', [
-                'queryStringFileName' => self::QUERY_STRING_FILE_NAME,
-                'fieldTextAreaName' => self::CONTENT_TEXTAREA_NAME,
+                'queryStringFileName' => CsvHandlerComponentInterface::QUERY_STRING_FILE_NAME,
+                'fieldTextAreaName' => CsvHandlerComponentInterface::CONTENT_TEXTAREA_NAME,
                 'filesList' => $csvFiles,
                 'listActiveCsv' => $activeFileName,
                 'textareaCsvContent' => $oldValue,

@@ -42,11 +42,11 @@
     "prefer-stable": true,
     "scripts": {
         "checkcode": [
-            "phpcbf --standard=PSR12 app/ config/ public/",
+            "phpcbf --standard=PSR12 app/ config/ tests/",
             "phplint",
             "phpstan analyse --configuration phpstan.neon"
         ],
-        "phpcbf": "phpcbf --standard=PSR12 app/ config/ public/",
+        "phpcbf": "phpcbf --standard=PSR12 app/ config/ tests/",
         "phplint": "phplint",
         "phpstan:analyze": "phpstan analyse --configuration phpstan.neon",
         "phpstan:baseline": "phpstan analyse --configuration phpstan.neon --generate-baseline",
