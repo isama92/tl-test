@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\App\Core\Storage;
 
-use Tests\Unit\App\Core\ComponentUtTestCase;
+use Tests\Unit\App\Core\CoreUtTestCase;
 
-abstract class StorageUtTestCase extends ComponentUtTestCase
+abstract class StorageUtTestCase extends CoreUtTestCase
 {
 }

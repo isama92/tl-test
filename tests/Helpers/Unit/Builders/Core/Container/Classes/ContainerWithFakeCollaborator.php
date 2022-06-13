@@ -4,6 +4,7 @@ namespace Tests\Helpers\Unit\Builders\Core\Container\Classes;
 
 use App\Core\Config\ConfigInterface;
 use App\Core\Container\Container;
+use App\Core\Container\ContainerInterface;
 use App\Core\Db\DbInterface;
 use App\Core\Logger\LoggerInterface;
 use App\Core\Renderer\RendererInterface;
@@ -87,31 +88,31 @@ class ContainerWithFakeCollaborator extends Container
     }
 
     /**
-     * @return \App\Core\Config\ConfigInterface
+     * @inheritDoc
      */
-    public function createConfig(): ConfigInterface
+    public function createConfig(string $configDirPath): ConfigInterface
     {
         return $this->fakeConfig;
     }
 
     /**
-     * @return \App\Core\Db\DbInterface
+     * @inheritDoc
      */
-    public function createDb(): DbInterface
+    public function createDb(string $host, int $port, string $user, string $password, string $dbname, string $charset): DbInterface
     {
         return $this->fakeDb;
     }
 
     /**
-     * @return \App\Core\Logger\LoggerInterface
+     * @inheritDoc
      */
-    public function createLogger(): LoggerInterface
+    public function createLogger(ContainerInterface $container): LoggerInterface
     {
         return $this->fakeLogger;
     }
 
     /**
-     * @return \App\Core\Request\RequestInterface
+     * @inheritDoc
      */
     public function createRequest(): RequestInterface
     {
@@ -119,7 +120,7 @@ class ContainerWithFakeCollaborator extends Container
     }
 
     /**
-     * @return \App\Core\Response\ResponseInterface
+     * @inheritDoc
      */
     public function createResponse(): ResponseInterface
     {
@@ -127,23 +128,31 @@ class ContainerWithFakeCollaborator extends Container
     }
 
     /**
-     * @return \App\Core\Renderer\RendererInterface
+     * @inheritDoc
      */
-    public function createRenderer(): RendererInterface
+    protected function createResponseWithResponseAndStatus(string $response, int $statusCode): ResponseInterface
+    {
+        return $this->fakeResponse;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function createRenderer(ContainerInterface $container): RendererInterface
     {
         return $this->fakeRenderer;
     }
 
     /**
-     * @return \App\Core\Router\RouterInterface
+     * @inheritDoc
      */
-    public function createRouter(): RouterInterface
+    public function createRouter(ContainerInterface $container): RouterInterface
     {
         return $this->fakeRouter;
     }
 
     /**
-     * @return \App\Core\Session\SessionInterface
+     * @inheritDoc
      */
     public function createSession(): SessionInterface
     {
@@ -151,9 +160,9 @@ class ContainerWithFakeCollaborator extends Container
     }
 
     /**
-     * @return \App\Core\Storage\StorageInterface
+     * @inheritDoc
      */
-    public function createStorage(): StorageInterface
+    public function createStorage(ContainerInterface $container): StorageInterface
     {
         return $this->fakeStorage;
     }

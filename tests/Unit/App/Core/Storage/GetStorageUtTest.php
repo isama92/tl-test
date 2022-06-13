@@ -14,6 +14,7 @@ class GetStorageUtTest extends StorageUtTestCase
     public function objectsCollaboration_ReadFromHappyPath_ContentReturned(): void
     {
         // Arrange
+        $container = $this->container;
         $filePath = CsvHandlerComponentInterface::STORAGE_CSV_DIR . 'test1.csv';
         $content = '';
 
@@ -23,5 +24,7 @@ class GetStorageUtTest extends StorageUtTestCase
         // Act
 
         // Assert
+        // TODO
+        $this->assertTrue(true);
     }
 }
