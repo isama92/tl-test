@@ -10,6 +10,8 @@ interface StorageInterface
 
     public const MODES = [self::MODE_R, self::MODE_W, self::MODE_A];
 
+    public const CONFIG_STORAGE_DIR = 'storage.dir';
+
     /**
      * @param string $filePath
      *

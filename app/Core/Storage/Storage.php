@@ -26,7 +26,7 @@ class Storage extends CoreAbstract implements StorageInterface
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
-        $this->storagePath = $container->getRootDir() . $this->container->config()->get('storage.dir');
+        $this->storagePath = $container->getRootDir() . $this->container->config()->get(self::CONFIG_STORAGE_DIR);
     }
 
     /**
@@ -41,7 +41,7 @@ class Storage extends CoreAbstract implements StorageInterface
         }
 
         $fullFilePath = $this->storagePath . $filePath;
-        $fh = $this->createSqlFileObject($fullFilePath, self::MODE_R);
+        $fh = $this->createSplFileObject($fullFilePath, self::MODE_R);
         $size = $fh->getSize();
         $content = $size > 0 ? $fh->fread($size) : false;
         return $content === false ? '' : $content;
@@ -57,7 +57,7 @@ class Storage extends CoreAbstract implements StorageInterface
 
         $this->createDirIfNotExists($filePath);
 
-        $fh = $this->createSqlFileObject($fullFilePath, self::MODE_W);
+        $fh = $this->createSplFileObject($fullFilePath, self::MODE_W);
         $fh->fwrite($content);
     }
 
@@ -71,7 +71,7 @@ class Storage extends CoreAbstract implements StorageInterface
 
         $this->createDirIfNotExists($filePath);
 
-        $fh = $this->createSqlFileObject($fullFilePath, self::MODE_A);
+        $fh = $this->createSplFileObject($fullFilePath, self::MODE_A);
         $fh->fwrite($content);
     }
 
@@ -118,7 +118,7 @@ class Storage extends CoreAbstract implements StorageInterface
         }
 
         $fullFilePath = $this->storagePath . $filePath;
-        $fh = $this->createSqlFileObject($fullFilePath, self::MODE_R);
+        $fh = $this->createSplFileObject($fullFilePath, self::MODE_R);
         $data = [];
 
         $headers = [];
@@ -159,7 +159,7 @@ class Storage extends CoreAbstract implements StorageInterface
      * @return \SplFileObject
      * @throws \App\Exceptions\Storage\InvalidModeException
      */
-    protected function createSqlFileObject(string $fullFilePath, string $mode): SplFileObject
+    protected function createSplFileObject(string $fullFilePath, string $mode): SplFileObject
     {
         if (!in_array($mode, self::MODES)) {
             throw new InvalidModeException($mode);

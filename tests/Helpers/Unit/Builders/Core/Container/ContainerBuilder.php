@@ -3,6 +3,7 @@
 namespace Tests\Helpers\Unit\Builders\Core\Container;
 
 use App\Core\Config\ConfigInterface;
+use App\Core\Container\ContainerInterface;
 use App\Core\Db\DbInterface;
 use App\Core\Logger\LoggerInterface;
 use App\Core\Renderer\RendererInterface;
@@ -28,7 +29,7 @@ class ContainerBuilder
      * @param \App\Core\Session\SessionInterface   $sessionMock
      * @param \App\Core\Storage\StorageInterface   $storageMock
      *
-     * @return \Tests\Helpers\Unit\Builders\Core\Container\Classes\ContainerWithFakeCollaborator
+     * @return \App\Core\Container\ContainerInterface
      */
     public static function makeWithFakeCollaborators(
         string $rootDir,
@@ -42,7 +43,7 @@ class ContainerBuilder
         RouterInterface $routerMock,
         SessionInterface $sessionMock,
         StorageInterface $storageMock
-    ) {
+    ): ContainerInterface {
         return new ContainerWithFakeCollaborator(
             $rootDir,
             $configDirName,
