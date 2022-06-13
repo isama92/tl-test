@@ -17,6 +17,36 @@ class Db extends CoreAbstract implements DbInterface
     protected PDO|null $db;
 
     /**
+     * @var string
+     */
+    protected string $host;
+
+    /**
+     * @var int
+     */
+    protected int $port;
+
+    /**
+     * @var string
+     */
+    protected string $user;
+
+    /**
+     * @var string
+     */
+    protected string $password;
+
+    /**
+     * @var string
+     */
+    protected string $dbname;
+
+    /**
+     * @var string
+     */
+    protected string $charset;
+
+    /**
      * @param string $host
      * @param string $user
      * @param string $password
@@ -32,27 +62,25 @@ class Db extends CoreAbstract implements DbInterface
         string $dbname,
         string $charset
     ) {
-        $this->connect($host, $port, $user, $password, $dbname, $charset);
+        $this->host = $host;
+        $this->port = $port;
+        $this->user = $user;
+        $this->password = $password;
+        $this->dbname = $dbname;
+        $this->charset = $charset;
     }
 
     /**
      * @inheritDoc
      */
-    public function connect(
-        string $host,
-        int $port,
-        string $user,
-        string $password,
-        string $dbname,
-        string $charset
-    ): void {
-        $dsn = "mysql:host={$host};port={$port};dbname={$dbname};charset={$charset}";
+    public function connect(): void {
+        $dsn = "mysql:host={$this->host};port={$this->port};dbname={$this->dbname};charset={$this->charset}";
         $options = [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
             PDO::ATTR_EMULATE_PREPARES => false,
         ];
-        $this->db = $this->createPDO($dsn, $user, $password, $options);
+        $this->db = $this->createPDO($dsn, $this->user, $this->password, $options);
     }
 
     /**
@@ -61,19 +89,6 @@ class Db extends CoreAbstract implements DbInterface
     public function disconnect(): void
     {
         $this->db = null;
-    }
-
-    /**
-     * @param string $dsn
-     * @param string $user
-     * @param string $password
-     * @param array  $options
-     *
-     * @return \PDO
-     */
-    protected function createPDO(string $dsn, string $user, string $password, array $options = []): PDO
-    {
-        return new PDO($dsn, $user, $password, $options);
     }
 
     /**
@@ -133,5 +148,18 @@ class Db extends CoreAbstract implements DbInterface
     {
         $stmt = $this->prepareAndExecute($query, $params);
         return $stmt->rowCount();
+    }
+
+    /**
+     * @param string $dsn
+     * @param string $user
+     * @param string $password
+     * @param array  $options
+     *
+     * @return \PDO
+     */
+    protected function createPDO(string $dsn, string $user, string $password, array $options = []): PDO
+    {
+        return new PDO($dsn, $user, $password, $options);
     }
 }

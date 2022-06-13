@@ -27,8 +27,20 @@ class App extends CoreAbstract implements AppInterface
     /**
      * @inheritDoc
      */
+    public function container(): ContainerInterface
+    {
+        return $this->container;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function run(): void
     {
+        $this->container()
+            ->db()
+            ->connect();
+
         $output = $this->container()
             ->router()
             ->handle()
@@ -42,14 +54,8 @@ class App extends CoreAbstract implements AppInterface
      */
     public function terminate(): void
     {
-        $this->container()->db()->disconnect();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function container(): ContainerInterface
-    {
-        return $this->container;
+        $this->container()
+            ->db()
+            ->disconnect();
     }
 }

@@ -7,6 +7,11 @@ use App\Core\Container\ContainerInterface;
 interface AppInterface
 {
     /**
+     * @return \App\Core\Container\ContainerInterface
+     */
+    public function container(): ContainerInterface;
+
+    /**
      * @return void
      */
     public function run(): void;
@@ -15,9 +20,4 @@ interface AppInterface
      * @return void
      */
     public function terminate(): void;
-
-    /**
-     * @return \App\Core\Container\ContainerInterface
-     */
-    public function container(): ContainerInterface;
 }

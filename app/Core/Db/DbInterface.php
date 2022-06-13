@@ -5,16 +5,9 @@ namespace App\Core\Db;
 interface DbInterface
 {
     /**
-     * @param string $host
-     * @param int    $port
-     * @param string $user
-     * @param string $password
-     * @param string $dbname
-     * @param string $charset
-     *
      * @return void
      */
-    public function connect(string $host, int $port, string $user, string $password, string $dbname, string $charset): void;
+    public function connect(): void;
 
     /**
      * @return void
