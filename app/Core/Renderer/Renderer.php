@@ -57,8 +57,8 @@ class Renderer extends CoreAbstract implements RendererInterface
             $configs['cache'] = $this->cachePath;
         }
 
-        $loader = new FilesystemLoader($this->viewsDirPath);
-        $this->twig = new Environment($loader, $configs);
+        $loader = $this->createTwigFilesystemLoader();
+        $this->twig = $this->createTwigEnvironment($loader, $configs);
     }
 
     /**
@@ -70,5 +70,24 @@ class Renderer extends CoreAbstract implements RendererInterface
     public function render(string $view, array $params = []): string
     {
         return $this->twig->render($view, $params);
+    }
+
+    /**
+     * @return \Twig\Loader\FilesystemLoader
+     */
+    protected function createTwigFilesystemLoader(): FilesystemLoader
+    {
+        return new FilesystemLoader($this->viewsDirPath);
+    }
+
+    /**
+     * @param \Twig\Loader\FilesystemLoader $loader
+     * @param array                         $configs
+     *
+     * @return \Twig\Environment
+     */
+    protected function createTwigEnvironment(FilesystemLoader $loader, array $configs = []): Environment
+    {
+        return new Environment($loader, $configs);
     }
 }
