@@ -9,6 +9,13 @@ use Twig\Loader\FilesystemLoader;
 
 class RendererBuilder
 {
+    /**
+     * @param \App\Core\Container\ContainerInterface $container
+     * @param \Twig\Loader\FilesystemLoader          $filesystemLoaderMock
+     * @param \Twig\Environment                      $environmentMock
+     *
+     * @return \Tests\Helpers\Unit\Builders\Core\Renderer\Classes\RendererWithFakeCollaborator
+     */
     public static function makeWithFakeCollaborators(
         ContainerInterface $container,
         FilesystemLoader $filesystemLoaderMock,

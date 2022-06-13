@@ -26,13 +26,13 @@ class Container extends CoreAbstract implements ContainerInterface
 {
     use ConfigFactoryMethod;
     use DbFactoryMethod;
-    use RouterFactoryMethod;
+    use LoggerFactoryMethod;
     use RequestFactoryMethod;
     use ResponseFactoryMethod;
     use RendererFactoryMethod;
+    use RouterFactoryMethod;
     use SessionFactoryMethod;
     use StorageFactoryMethod;
-    use LoggerFactoryMethod;
 
     /**
      * @var \App\Core\Config\ConfigInterface
@@ -96,7 +96,7 @@ class Container extends CoreAbstract implements ContainerInterface
     /**
      * @inheritDoc
      */
-    public function router(): RouterInterface
+    public function logger(): LoggerInterface
     {
         return $this->singleton(__FUNCTION__, [
             $this,
@@ -132,15 +132,7 @@ class Container extends CoreAbstract implements ContainerInterface
     /**
      * @inheritDoc
      */
-    public function session(): SessionInterface
-    {
-        return $this->singleton(__FUNCTION__);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function storage(): StorageInterface
+    public function router(): RouterInterface
     {
         return $this->singleton(__FUNCTION__, [
             $this,
@@ -150,7 +142,15 @@ class Container extends CoreAbstract implements ContainerInterface
     /**
      * @inheritDoc
      */
-    public function logger(): LoggerInterface
+    public function session(): SessionInterface
+    {
+        return $this->singleton(__FUNCTION__);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function storage(): StorageInterface
     {
         return $this->singleton(__FUNCTION__, [
             $this,
