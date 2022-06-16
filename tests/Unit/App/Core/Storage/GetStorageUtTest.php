@@ -4,19 +4,10 @@ namespace Tests\Unit\App\Core\Storage;
 
 use App\Components\CsvHandler\CsvHandlerComponentInterface;
 use App\Core\Storage\StorageInterface;
-use Tests\Helpers\Unit\Builders\Core\Container\ContainerBuilder;
 use Tests\Helpers\Unit\Builders\Core\Storage\Classes\StorageWithFakeCollaborator;
-use Tests\Helpers\Unit\Builders\Mocks\{
-    ConfigMockBuilder,
-    DbMockBuilder,
-    LoggerMockBuilder,
-    RendererMockBuilder,
-    RequestMockBuilder,
-    ResponseMockBuilder,
-    RouterMockBuilder,
-    SessionMockBuilder,
-    SplFileObjectMockBuilder,
-    StorageMockBuilder,
+use Tests\Helpers\Unit\Builders\Mocks\{ConfigMockBuilder,
+    ContainerMockBuilder,
+    SplFileObjectMockBuilder
 };
 
 class GetStorageUtTest extends StorageUtTestCase
@@ -42,14 +33,17 @@ class GetStorageUtTest extends StorageUtTestCase
 
         $splFileObjectMock = (new SplFileObjectMockBuilder())->make([$fullFilePath, $fileMode]);
         $configMock = (new ConfigMockBuilder())->make();
-        $dbMock = (new DbMockBuilder())->make();
-        $loggerMock = (new LoggerMockBuilder())->make();
-        $requestMock = (new RequestMockBuilder())->make();
-        $responseMock = (new ResponseMockBuilder())->make();
-        $rendererMock = (new RendererMockBuilder())->make();
-        $routerMock = (new RouterMockBuilder())->make();
-        $sessionMock = (new SessionMockBuilder())->make();
-        $storageMock = (new StorageMockBuilder())->make();
+        $containerMock = (new ContainerMockBuilder())->make();
+
+        $containerMock->shouldReceive('getRootDir')
+            ->once()
+            ->withNoArgs()
+            ->andReturn($this->rootDir);
+
+        $containerMock->shouldReceive('config')
+            ->once()
+            ->withNoArgs()
+            ->andReturn($configMock);
 
         $configMock->shouldReceive('get')
             ->once()
@@ -65,21 +59,7 @@ class GetStorageUtTest extends StorageUtTestCase
             ->with($expectedContentLength)
             ->andReturn($expectedContent);
 
-        $container = ContainerBuilder::makeWithFakeCollaborators(
-            $this->rootDir,
-            $this->configDirName,
-            $configMock,
-            $dbMock,
-            $loggerMock,
-            $requestMock,
-            $responseMock,
-            $rendererMock,
-            $routerMock,
-            $sessionMock,
-            $storageMock
-        );
-
-        $storage = new StorageWithFakeCollaborator($container, $splFileObjectMock);
+        $storage = new StorageWithFakeCollaborator($containerMock, $splFileObjectMock);
 
         // Act
         $content = $storage->get($filePath);
