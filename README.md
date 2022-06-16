@@ -20,7 +20,6 @@ Second, the following commands must be run:
 
 ## Docker
 I added some docker images that I used during the development process.
-They are **NOT** safe for production environments (eg. php errors are not disabled).
 
 ## TODOS
 - post data validators
