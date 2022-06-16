@@ -26,3 +26,6 @@ They are **NOT** safe for production environments (eg. php errors are not disabl
 - post data validators
 - template error bag
 - add logger formatters to format log messages
+- routes: add a currentRoute method, create a Route class to store routes infos and use getRoute with the route name to get the route. Add getPath param to Route. Inject router to Twig and use it to get route paths.
+- storage paths need improvement
+

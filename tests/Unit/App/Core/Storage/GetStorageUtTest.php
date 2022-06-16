@@ -22,6 +22,8 @@ use Tests\Helpers\Unit\Builders\Mocks\{
 class GetStorageUtTest extends StorageUtTestCase
 {
     /**
+     * @test
+     *
      * @return void
      * @throws \App\Exceptions\Storage\FileNotFoundException
      * @throws \App\Exceptions\Storage\InvalidModeException
