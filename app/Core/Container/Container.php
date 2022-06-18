@@ -72,7 +72,7 @@ class Container extends CoreAbstract implements ContainerInterface
      */
     public function config(): ConfigInterface
     {
-        return $this->singleton(__FUNCTION__, [
+        return $this->getCoreInstance(__FUNCTION__, [
             // $configDirPath
             $this->rootDir . $this->configDirName . DIRECTORY_SEPARATOR,
         ]);
@@ -83,7 +83,7 @@ class Container extends CoreAbstract implements ContainerInterface
      */
     public function db(): DbInterface
     {
-        return $this->singleton(__FUNCTION__, [
+        return $this->getCoreInstance(__FUNCTION__, [
             $this->config()->get('db.host'),
             $this->config()->get('db.port'),
             $this->config()->get('db.user'),
@@ -98,7 +98,7 @@ class Container extends CoreAbstract implements ContainerInterface
      */
     public function logger(): LoggerInterface
     {
-        return $this->singleton(__FUNCTION__, [
+        return $this->getCoreInstance(__FUNCTION__, [
             $this,
         ]);
     }
@@ -108,7 +108,7 @@ class Container extends CoreAbstract implements ContainerInterface
      */
     public function request(): RequestInterface
     {
-        return $this->singleton(__FUNCTION__);
+        return $this->getCoreInstance(__FUNCTION__);
     }
 
     /**
@@ -116,7 +116,7 @@ class Container extends CoreAbstract implements ContainerInterface
      */
     public function response(): ResponseInterface
     {
-        return $this->singleton(__FUNCTION__);
+        return $this->getCoreInstance(__FUNCTION__);
     }
 
     /**
@@ -124,7 +124,7 @@ class Container extends CoreAbstract implements ContainerInterface
      */
     public function renderer(): RendererInterface
     {
-        return $this->singleton(__FUNCTION__, [
+        return $this->getCoreInstance(__FUNCTION__, [
             $this,
         ]);
     }
@@ -134,7 +134,7 @@ class Container extends CoreAbstract implements ContainerInterface
      */
     public function router(): RouterInterface
     {
-        return $this->singleton(__FUNCTION__, [
+        return $this->getCoreInstance(__FUNCTION__, [
             $this,
         ]);
     }
@@ -144,7 +144,7 @@ class Container extends CoreAbstract implements ContainerInterface
      */
     public function session(): SessionInterface
     {
-        return $this->singleton(__FUNCTION__);
+        return $this->getCoreInstance(__FUNCTION__);
     }
 
     /**
@@ -152,7 +152,7 @@ class Container extends CoreAbstract implements ContainerInterface
      */
     public function storage(): StorageInterface
     {
-        return $this->singleton(__FUNCTION__, [
+        return $this->getCoreInstance(__FUNCTION__, [
             $this,
         ]);
     }
@@ -163,7 +163,7 @@ class Container extends CoreAbstract implements ContainerInterface
      *
      * @return mixed Instance of the given component
      */
-    protected function singleton(string $camelCaseComponent, array $params = []): mixed
+    protected function getCoreInstance(string $camelCaseComponent, array $params = []): mixed
     {
         $pascalCaseComponent = ucfirst($camelCaseComponent);
         $factoryMethod = "create{$pascalCaseComponent}";
